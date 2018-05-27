@@ -1,60 +1,53 @@
 ﻿using System;
 using System.IO;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
-namespace POLARIS_Core
-{
-    class Core
-    {
+namespace POLARIS {
+	class Core {
 		// Storing library of assets
-		static String[] verbs = File.ReadAllLines(@"C:\Users\Mei\OneDrive\1. Code\GitHub\Project-POLARIS/verbs.txt", Encoding.UTF8);
-		static String[] pronouns = File.ReadAllLines(@"C:\Users\Mei\OneDrive\1. Code\GitHub\Project-POLARIS/pronouns.txt", Encoding.UTF8);
+		static String[] verbs = File.ReadAllLines("verbs.txt", Encoding.UTF8);
+		static String[] pronouns = File.ReadAllLines("pronouns.txt", Encoding.UTF8);
 		static String[] inputArr;
 
-		static void Main(string[] args)
-        {
+		static void Main(string[] args) {
 			// Preparing String[]
 			Console.WriteLine("Type something: ");
 			String input = Console.ReadLine();
 			input = input.ToLower();
-			inputArr = input.Split(" ");
+			inputArr = input.Split(' ');
 
 			// DEBUG
 			Boolean isQuestion = CheckQuestion();
 			Console.WriteLine("It's a Question? : " + isQuestion);
 
 			System.Threading.Thread.Sleep(60000);
-        }
+		}
 
-		private static Boolean CheckQuestion()
-		{
+		private static Boolean CheckQuestion() {
 			int verbIndex = -1, pronounIndex = -1, knowIndex = -1;
 			Boolean isThereAKnow = false;
 
-			for (int i = 0; i < inputArr.Length; i++)
-			{
+			for (int i = 0; i < inputArr.Length; i++) {
 
 				// Storing index of the first Verb
-				for (int j = 0; j < verbs.Length; j++)
-				{
-					if (inputArr[i] == verbs[j] && verbIndex == -1)
-					{
+				for (int j = 0; j < verbs.Length; j++) {
+					if (inputArr[i] == verbs[j] && verbIndex == -1) {
 						verbIndex = i;
 					}
 				}
 
 				// Storing index of the first Pronoun
-				for (int j = 0; j < pronouns.Length; j++)
-				{
-					if (inputArr[i] == pronouns[j] && pronounIndex == -1)
-					{
+				for (int j = 0; j < pronouns.Length; j++) {
+					if (inputArr[i] == pronouns[j] && pronounIndex == -1) {
 						pronounIndex = i;
 					}
 				}
 
 				// Checking if there's a "know"
-				if (inputArr[i] == "know")
-				{
+				if (inputArr[i] == "know") {
 					isThereAKnow = true;
 					knowIndex = i;
 				}
@@ -71,5 +64,5 @@ namespace POLARIS_Core
 			else
 				return false;
 		}
-    }
+	}
 }

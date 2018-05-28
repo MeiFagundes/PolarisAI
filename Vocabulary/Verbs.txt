@@ -387,8 +387,8 @@ pop
 possess
 post
 pour
-practise (BrE)
-practice (AmE)
+practise
+practice
 pray
 preach
 precede

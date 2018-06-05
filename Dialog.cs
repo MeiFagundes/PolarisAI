@@ -8,56 +8,84 @@ namespace POLARIS {
 	class Dialog : Phrase {
 
 		// --- VARIABLES ---
-		public Boolean isQuestion = false, isRequest = false;
+
+		List<int> verbsIndex = new List<int>();
+		List<int> pronounsIndex = new List<int>();
+		List<int> adverbsIndex = new List<int>();
+		public bool isQuestion, isRequest, isVerbsEmpty, isPronounsEmpty, isAdverbsEmpty;
 
 		// --- CONSTRUCTORS ---
+
 		public Dialog(String input) : base(input) {
 			phraseIn = input.ToLower().Split(' ');
-			CheckRequest();
+			
+			// Storing index of all known Pronouns and Verbs
+			for (int i = 0; i < phraseIn.Length; i++) {
+
+				// Verbs
+				for (int j = 0; j < verbsSrc.Length; j++) {
+					if (phraseIn[i] == verbsSrc[j]) {
+						verbsIndex.Add(i);
+					}
+				}
+
+				// Pronouns
+				for (int j = 0; j < pronounsSrc.Length; j++) {
+					if (phraseIn[i] == pronounsSrc[j]) {
+						pronounsIndex.Add(i);
+					}
+				}
+
+				// Adverbs
+				for (int j = 0; j < adverbsSrc.Length; j++) {
+					if (phraseIn[i] == adverbsSrc[j]) {
+						adverbsIndex.Add(i);
+					}
+				}
+			}
+			isVerbsEmpty = !verbsIndex.Any();
+			isPronounsEmpty = !pronounsIndex.Any();
+			isAdverbsEmpty = !adverbsIndex.Any();
+
+			Pipeline();
 		}
+
 		public Dialog() : base() {}
 
 		// --- METHODS ---
+		
+		// Main Pipeline to aggregate all Checks
+		public void Pipeline() {
 
+			isRequest = CheckRequest();
+			isQuestion = CheckQuestion();
+		}
+		
 		// Check if the Phrase is a Request
-		public void CheckRequest() {
-			int verbIndex = -1, pronounIndex = -1;
+		public bool CheckRequest() {
 
-			for (int i = 0; i < phraseIn.Length; i++) {
+			
 
-				// Storing index of the first Verb
-				for (int j = 0; j < verbs.Length; j++) {
-					if (phraseIn[i] == verbs[j] && verbIndex == -1) {
-						verbIndex = i;
-					}
+			// There has to be a Verb to be a Request and it has to be up to the third word.
+			if (!isVerbsEmpty && verbsIndex[0] < 3) {
+
+				// isRequest if there's just a Verb. || Example: "Do this..."
+				if (isPronounsEmpty) {
+					return true;
 				}
 
-				// Storing index of the first Pronoun
-				for (int j = 0; j < pronouns.Length; j++) {
-					if (phraseIn[i] == pronouns[j] && pronounIndex == -1) {
-						pronounIndex = i;
-					}
+				// isRequest if the Pronoun is (not immediately) after the Verb
+				else if (pronounsIndex[0] > verbsIndex[0] && pronounsIndex[0] - verbsIndex[0] > 1) {
+					return true;
 				}
 			}
-
-			// isQuestion and isRequest if the last Char is a "?"
-			if (phraseIn[phraseIn.Length - 1].Substring(phraseIn[phraseIn.Length - 1].Length - 1) == "?") {
-				isRequest = true;
-				isQuestion = true;
-				return;
-			}
-
-			if (pronounIndex > verbIndex || pronounIndex == -1 // isRequest if the Pronoun is after the Verb or if there's just a Verb. || Example: "Do this..."
-				&& verbIndex != -1 && verbIndex < 3) { // There has to be a Verb and it has to be up to the third word.
-				isRequest = true;
-				CheckQuestion(verbIndex, pronounIndex);
-			}
+			return false;
 		}
 
 		// Check if the Phrase is a question
-		public void CheckQuestion(int verbIndex, int pronounIndex) {
+		public bool CheckQuestion() {
 			int knowIndex = -1;
-			Boolean isThereAKnow = false;
+			bool isThereAKnow = false;
 
 			for (int i = 0; i < phraseIn.Length; i++) {
 
@@ -68,17 +96,34 @@ namespace POLARIS {
 				}
 			}
 
-			if ((pronounIndex > verbIndex && pronounIndex - verbIndex <= 1 || // isQuestion if the Pronoun is immediately after the Verb. || Example: "Do you know if..."
-				(isThereAKnow && verbIndex > pronounIndex && knowIndex > verbIndex)) // isQuestion if there's a (Pronoun + Verb + "know") || Example: "I Want to know if..."
-				&& verbIndex != -1 && pronounIndex != -1) // There has to be a Verb and a Pronoun to be a question in those cases
-				isQuestion = true;
+			// isQuestion and if the last Char is a "?"
+			if (phraseIn[phraseIn.Length - 1].Substring(phraseIn[phraseIn.Length - 1].Length - 1) == "?") {
+				return true;
+			}
+
+			// There has to be a Verb and a Pronoun to be a question in those cases
+			if (!isVerbsEmpty && !isPronounsEmpty) {
+
+				// isQuestion if the Pronoun is immediately after the Verb. || Example: "Do you know if..."
+				if (pronounsIndex[0] > verbsIndex[0] && pronounsIndex[0] - verbsIndex[0] <= 1) {
+					return true;
+				}
+
+				// isQuestion if there's a (Pronoun + Verb + "know") || Example: "I Want to know if..."
+				else if (isThereAKnow && verbsIndex[0] > pronounsIndex[0] && knowIndex > verbsIndex[0]) { 
+					return true;
+				}
+			}
+			return false;
 		}
 
 		override
 		public void Debug() {
-			Console.WriteLine("\nIs this a Request? : " + isRequest);
-			Console.WriteLine(" -> Is this a Question? : " + isQuestion);
-			Console.WriteLine("\nVocabulary size:\n   Nº of Verbs: " + verbs.Length + "\n   Nº of Pronouns: " + pronouns.Length);
+			Console.WriteLine("\nisPronounsEmpty? : " + isPronounsEmpty);
+			Console.WriteLine("isVerbsEmpty? : " + isVerbsEmpty + "\n");
+			Console.WriteLine("Is this a Request? : " + isRequest);
+			Console.WriteLine("Is this a Question? : " + isQuestion);
+			Console.WriteLine("\nVocabulary size:\n   Nº of Verbs: " + verbsSrc.Length + "\n   Nº of Pronouns: " + pronounsSrc.Length + "\n   Nº of Adverbs: " + adverbsSrc.Length);
 		}
 	}
 }

@@ -9,17 +9,18 @@ namespace POLARIS {
 	class Core {
 		static void Main(string[] args) {
 
+			Dialog dialog;
+			String input = "Polaris, turn on the lights please.";
+
 			while (true) {
-				Console.WriteLine("Type something: ");
-				Dialog dialog = new Dialog(Console.ReadLine());
+				Console.WriteLine("'" + input + "'");
+				dialog = new Dialog(input);
 				dialog.Debug();
 
-				Console.WriteLine("\n ----- Press Enter to try again... -----");
-				Console.ReadLine();
+				Console.WriteLine("Type something: ");
+				input = Console.ReadLine();
 				Console.Clear();
 			}
-			
-			//System.Threading.Thread.Sleep(60000);
 		}
 	}
 }

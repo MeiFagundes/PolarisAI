@@ -51,6 +51,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Vocabulary\ActionVerbs.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Vocabulary\Adverbs.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

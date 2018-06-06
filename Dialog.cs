@@ -9,40 +9,65 @@ namespace POLARIS {
 
 		// --- VARIABLES ---
 
-		List<int> verbsIndex = new List<int>();
-		List<int> pronounsIndex = new List<int>();
-		List<int> adverbsIndex = new List<int>();
-		public bool isQuestion, isRequest, isVerbsEmpty, isPronounsEmpty, isAdverbsEmpty;
+		List<Int32> verbsIndex = new List<Int32>();
+		List<Int32> pronounsIndex = new List<Int32>();
+		List<Int32> adverbsIndex = new List<Int32>();
+		List<Int32> actionVerbsIndex = new List<Int32>();
+		public Boolean isQuestion, isRequest, isVerbsEmpty, isPronounsEmpty, isAdverbsEmpty, isActionVerbsEmpty;
 
 		// --- CONSTRUCTORS ---
 
 		public Dialog(String input) : base(input) {
-			phraseIn = input.ToLower().Split(' ');
 			
-			// Storing index of all known Pronouns and Verbs
-			for (int i = 0; i < phraseIn.Length; i++) {
+			String[] Aux;
+			Aux = input.ToLower().Split(' ');
+
+			// Copying input from Aux to the List 'phrase'
+			for (int i = 0; i < Aux.Length; i++) {
+				phrase.Add(Aux[i]);
+			}
+
+			// Isolating ponctuation mark as a last String
+			String lastString = phrase[phrase.Count - 1].Substring(phrase[phrase.Count - 1].Length - 1);
+			if (lastString.Substring(lastString.Length - 1) == "?" || lastString.Substring(lastString.Length - 1) == "." || lastString.Substring(lastString.Length - 1) == "!") {
+				String dot = lastString.Substring(lastString.Length - 1);
+				phrase[phrase.Count - 1].Remove(phrase[phrase.Count - 1].Length - 1);
+				phrase.Add(dot);
+			}
+
+			// Storing index of all known Pronouns, Verbs, ActionVerbs and Adverbs
+			for (int i = 0; i < phrase.Count; i++) {
 
 				// Verbs
-				for (int j = 0; j < verbsSrc.Length; j++) {
-					if (phraseIn[i] == verbsSrc[j]) {
+				for (int j = 0; j < verbsFile.Length; j++) {
+					if (phrase[i] == verbsFile[j]) {
 						verbsIndex.Add(i);
 					}
 				}
 
 				// Pronouns
-				for (int j = 0; j < pronounsSrc.Length; j++) {
-					if (phraseIn[i] == pronounsSrc[j]) {
+				for (int j = 0; j < pronounsFile.Length; j++) {
+					if (phrase[i] == pronounsFile[j]) {
 						pronounsIndex.Add(i);
 					}
 				}
 
 				// Adverbs
-				for (int j = 0; j < adverbsSrc.Length; j++) {
-					if (phraseIn[i] == adverbsSrc[j]) {
+				for (int j = 0; j < adverbsFile.Length; j++) {
+					if (phrase[i] == adverbsFile[j]) {
 						adverbsIndex.Add(i);
 					}
 				}
+
+				// Action Verbs
+				for (int j = 0; j < actionVerbsFile.Length; j++) {
+					if (phrase[i] == actionVerbsFile[j]) {
+						actionVerbsIndex.Add(i);
+					}
+				}
 			}
+
+			isActionVerbsEmpty = !actionVerbsIndex.Any();
 			isVerbsEmpty = !verbsIndex.Any();
 			isPronounsEmpty = !pronounsIndex.Any();
 			isAdverbsEmpty = !adverbsIndex.Any();
@@ -62,12 +87,22 @@ namespace POLARIS {
 		}
 		
 		// Check if the Phrase is a Request
-		public bool CheckRequest() {
-
+		public Boolean CheckRequest() {
 			
-
 			// There has to be a Verb to be a Request and it has to be up to the third word.
 			if (!isVerbsEmpty && verbsIndex[0] < 3) {
+
+				// isRequest if an "you" is succeeded almost immediately by an ActionVerb.
+				for (int i = 0; i < pronounsIndex.Count; i++) {
+					if (phrase[pronounsIndex[i]] == "you") {
+						for (int j = 0; j < actionVerbsIndex.Count; j++) {
+							Int32 differenceTemp = actionVerbsIndex[j] - pronounsIndex[i];
+							if (differenceTemp <= 2 && differenceTemp > 0) {
+								return true;
+							}
+						}
+					}
+				}
 
 				// isRequest if there's just a Verb. || Example: "Do this..."
 				if (isPronounsEmpty) {
@@ -83,21 +118,21 @@ namespace POLARIS {
 		}
 
 		// Check if the Phrase is a question
-		public bool CheckQuestion() {
-			int knowIndex = -1;
-			bool isThereAKnow = false;
+		public Boolean CheckQuestion() {
+			Int32 knowIndex = -1;
+			Boolean isThereAKnow = false;
 
-			for (int i = 0; i < phraseIn.Length; i++) {
+			for (int i = 0; i < phrase.Count; i++) {
 
 				// Checking if there's a "know"
-				if (phraseIn[i] == "know") {
+				if (phrase[i] == "know") {
 					isThereAKnow = true;
 					knowIndex = i;
 				}
 			}
 
 			// isQuestion and if the last Char is a "?"
-			if (phraseIn[phraseIn.Length - 1].Substring(phraseIn[phraseIn.Length - 1].Length - 1) == "?") {
+			if (phrase[phrase.Count - 1] == "?") {
 				return true;
 			}
 
@@ -119,11 +154,9 @@ namespace POLARIS {
 
 		override
 		public void Debug() {
-			Console.WriteLine("\nisPronounsEmpty? : " + isPronounsEmpty);
-			Console.WriteLine("isVerbsEmpty? : " + isVerbsEmpty + "\n");
-			Console.WriteLine("Is this a Request? : " + isRequest);
+			Console.WriteLine("\nIs this a Request? : " + isRequest);
 			Console.WriteLine("Is this a Question? : " + isQuestion);
-			Console.WriteLine("\nVocabulary size:\n   Nº of Verbs: " + verbsSrc.Length + "\n   Nº of Pronouns: " + pronounsSrc.Length + "\n   Nº of Adverbs: " + adverbsSrc.Length);
+			Console.WriteLine("\nVocabulary size:\n   Nº of Verbs: " + verbsFile.Length + "\n   Nº of Pronouns: " + pronounsFile.Length + "\n   Nº of Adverbs: " + adverbsFile.Length + "\n");
 		}
 	}
 }

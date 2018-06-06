@@ -166,6 +166,7 @@ drum
 dry
 dust
 earn
+eat
 educate
 embarrass
 employ

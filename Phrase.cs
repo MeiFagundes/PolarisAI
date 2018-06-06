@@ -9,11 +9,12 @@ namespace POLARIS {
 	public abstract class Phrase {
 
 		// --- VARIABLES ---
-		public String[] verbsSrc = File.ReadAllLines("Vocabulary/Verbs.txt", Encoding.UTF8);
-		public String[] pronounsSrc = File.ReadAllLines("Vocabulary/Pronouns.txt", Encoding.UTF8);
-		public String[] adverbsSrc = File.ReadAllLines("Vocabulary/Adverbs.txt", Encoding.UTF8);
-		public String[] phraseIn;
-		
+		public String[] verbsFile = File.ReadAllLines("Vocabulary/Verbs.txt", Encoding.UTF8);
+		public String[] actionVerbsFile = File.ReadAllLines("Vocabulary/ActionVerbs.txt", Encoding.UTF8);
+		public String[] pronounsFile = File.ReadAllLines("Vocabulary/Pronouns.txt", Encoding.UTF8);
+		public String[] adverbsFile = File.ReadAllLines("Vocabulary/Adverbs.txt", Encoding.UTF8);
+		public List<String> phrase = new List<String>();
+
 		// --- CONSTRUCTORS ---
 		public Phrase(String input) {
 			

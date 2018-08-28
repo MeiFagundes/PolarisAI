@@ -1,162 +1,84 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace POLARIS {
-	class Dialog : Phrase {
+	public class Dialog {
 
 		// --- VARIABLES ---
 
-		List<Int32> verbsIndex = new List<Int32>();
-		List<Int32> pronounsIndex = new List<Int32>();
-		List<Int32> adverbsIndex = new List<Int32>();
-		List<Int32> actionVerbsIndex = new List<Int32>();
-		public Boolean isQuestion, isRequest, isVerbsEmpty, isPronounsEmpty, isAdverbsEmpty, isActionVerbsEmpty;
+		public Vocabulary vocabulary;
+
+		public List<String> Phrase { get; set; } = new List<String>();
+		public List<Int32> VerbsIndex { get; set; } = new List<Int32>();
+		public List<Int32> PronounsIndex { get; set; } = new List<Int32>();
+		public List<Int32> AdverbsIndex { get; set; } = new List<Int32>();
+		public List<Int32> SkillsIndex { get; set; } = new List<Int32>();
+		public List<Int32> NounsIndex { get; set; } = new List<Int32>();
+
+		public Boolean IsVerbsEmpty { get; set; }
+		public Boolean IsPronounsEmpty { get; set; }
+		public Boolean IsAdverbsEmpty { get; set; }
+		public Boolean IsSkillsEmpty { get; set; }
+		public Boolean IsNounsEmpty { get; set; }
+		public Boolean IsRequest { get; set; }
+		public Boolean IsQuestion { get; set; }
 
 		// --- CONSTRUCTORS ---
 
-		public Dialog(String input) : base(input) {
-			
-			String[] Aux;
+		public Dialog(String input, Vocabulary vocabularyIn) {
+
+			this.vocabulary = vocabularyIn;
+
+				String[] Aux;
 			Aux = input.ToLower().Split(' ');
 
 			// Copying input from Aux to the List 'phrase'
 			for (int i = 0; i < Aux.Length; i++) {
-				phrase.Add(Aux[i]);
+				Phrase.Add(Aux[i]);
 			}
 
 			// Isolating ponctuation mark as a last String
-			String lastString = phrase[phrase.Count - 1].Substring(phrase[phrase.Count - 1].Length - 1);
+			String lastString = Phrase[Phrase.Count - 1].Substring(Phrase[Phrase.Count - 1].Length - 1);
 			if (lastString.Substring(lastString.Length - 1) == "?" || lastString.Substring(lastString.Length - 1) == "." || lastString.Substring(lastString.Length - 1) == "!") {
 				String dot = lastString.Substring(lastString.Length - 1);
-				phrase[phrase.Count - 1].Remove(phrase[phrase.Count - 1].Length - 1);
-				phrase.Add(dot);
+				Phrase[Phrase.Count - 1].Remove(Phrase[Phrase.Count - 1].Length - 1);
+				Phrase.Add(dot);
 			}
-
-			// Storing index of all known Pronouns, Verbs, ActionVerbs and Adverbs
-			for (int i = 0; i < phrase.Count; i++) {
-
-				// Verbs
-				for (int j = 0; j < verbsFile.Length; j++) {
-					if (phrase[i] == verbsFile[j]) {
-						verbsIndex.Add(i);
-					}
-				}
-
-				// Pronouns
-				for (int j = 0; j < pronounsFile.Length; j++) {
-					if (phrase[i] == pronounsFile[j]) {
-						pronounsIndex.Add(i);
-					}
-				}
-
-				// Adverbs
-				for (int j = 0; j < adverbsFile.Length; j++) {
-					if (phrase[i] == adverbsFile[j]) {
-						adverbsIndex.Add(i);
-					}
-				}
-
-				// Action Verbs
-				for (int j = 0; j < actionVerbsFile.Length; j++) {
-					if (phrase[i] == actionVerbsFile[j]) {
-						actionVerbsIndex.Add(i);
-					}
-				}
-			}
-
-			isActionVerbsEmpty = !actionVerbsIndex.Any();
-			isVerbsEmpty = !verbsIndex.Any();
-			isPronounsEmpty = !pronounsIndex.Any();
-			isAdverbsEmpty = !adverbsIndex.Any();
-
-			Pipeline();
+			
+			IsSkillsEmpty = IndexVocabulary(vocabulary.Skills, SkillsIndex);
+			IsVerbsEmpty = IndexVocabulary(vocabulary.Verbs, VerbsIndex);
+			IsPronounsEmpty = IndexVocabulary(vocabulary.Pronouns, PronounsIndex);
+			IsAdverbsEmpty = IndexVocabulary(vocabulary.Adverbs, AdverbsIndex);
+			IsNounsEmpty = IndexVocabulary(vocabulary.Nouns, NounsIndex);
 		}
-
-		public Dialog() : base() {}
+		public Dialog() { }
 
 		// --- METHODS ---
-		
-		// Main Pipeline to aggregate all Checks
-		public void Pipeline() {
 
-			isRequest = CheckRequest();
-			isQuestion = CheckQuestion();
-		}
-		
-		// Check if the Phrase is a Request
-		public Boolean CheckRequest() {
-			
-			// There has to be a Verb to be a Request and it has to be up to the third word.
-			if (!isVerbsEmpty && verbsIndex[0] < 3) {
+		/// <summary>
+		/// Stores Vocabulary elements and their indexes
+		/// </summary>
+		/// <param name="VocabularyFile"></param>
+		/// <param name="Indexes"></param>
+		/// <returns></returns>
+		private Boolean IndexVocabulary(List<String> VocabularyFile, List<Int32> Indexes) {
 
-				// isRequest if an "you" is succeeded almost immediately by an ActionVerb.
-				for (int i = 0; i < pronounsIndex.Count; i++) {
-					if (phrase[pronounsIndex[i]] == "you") {
-						for (int j = 0; j < actionVerbsIndex.Count; j++) {
-							Int32 differenceTemp = actionVerbsIndex[j] - pronounsIndex[i];
-							if (differenceTemp <= 2 && differenceTemp > 0) {
-								return true;
-							}
-						}
+			for (int i = 0; i < Phrase.Count; i++) {
+				foreach (String currentFile in VocabularyFile) {
+					if (Phrase[i] == currentFile) {
+						Indexes.Add(i);
 					}
 				}
-
-				// isRequest if there's just a Verb. || Example: "Do this..."
-				if (isPronounsEmpty) {
-					return true;
-				}
-
-				// isRequest if the Pronoun is (not immediately) after the Verb
-				else if (pronounsIndex[0] > verbsIndex[0] && pronounsIndex[0] - verbsIndex[0] > 1) {
-					return true;
-				}
 			}
-			return false;
-		}
+			return !Indexes.Any();
+		} 
 
-		// Check if the Phrase is a question
-		public Boolean CheckQuestion() {
-			Int32 knowIndex = -1;
-			Boolean isThereAKnow = false;
-
-			for (int i = 0; i < phrase.Count; i++) {
-
-				// Checking if there's a "know"
-				if (phrase[i] == "know") {
-					isThereAKnow = true;
-					knowIndex = i;
-				}
-			}
-
-			// isQuestion and if the last Char is a "?"
-			if (phrase[phrase.Count - 1] == "?") {
-				return true;
-			}
-
-			// There has to be a Verb and a Pronoun to be a question in those cases
-			if (!isVerbsEmpty && !isPronounsEmpty) {
-
-				// isQuestion if the Pronoun is immediately after the Verb. || Example: "Do you know if..."
-				if (pronounsIndex[0] > verbsIndex[0] && pronounsIndex[0] - verbsIndex[0] <= 1) {
-					return true;
-				}
-
-				// isQuestion if there's a (Pronoun + Verb + "know") || Example: "I Want to know if..."
-				else if (isThereAKnow && verbsIndex[0] > pronounsIndex[0] && knowIndex > verbsIndex[0]) { 
-					return true;
-				}
-			}
-			return false;
-		}
-
-		override
 		public void Debug() {
-			Console.WriteLine("\nIs this a Request? : " + isRequest);
-			Console.WriteLine("Is this a Question? : " + isQuestion);
-			Console.WriteLine("\nVocabulary size:\n   Nº of Verbs: " + verbsFile.Length + "\n   Nº of Pronouns: " + pronounsFile.Length + "\n   Nº of Adverbs: " + adverbsFile.Length + "\n");
+			Console.WriteLine("\nDialog Debug ->\n   Is this a Request? : " + IsRequest);
+			Console.WriteLine("   Is this a Question? : " + IsQuestion + "\n");
 		}
 	}
 }

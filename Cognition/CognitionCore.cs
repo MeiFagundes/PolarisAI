@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Linq;
 using System.Reflection;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace POLARIS.Cognition {
@@ -11,16 +9,17 @@ namespace POLARIS.Cognition {
 		/// Fetches and executes the 'Cognize' Methods from all the Classes inside the 'Cognition' Namespace
 		/// </summary>
 		/// <param name="dialog"></param>
-		public static void Fetch(Dialog dialog) {
+		public static void FetchCognition(Dialog dialog) {
 
 			Type[] classTypes = POLARIS.Utilities.GetTypesInNamespace(Assembly.GetExecutingAssembly(), "POLARIS.Cognition");
-
-			// If this throws a 'NullReferenceException' just change the FOR condition to 'i < classTypes.Length - 1' to make it not trigger the '<>c__DisplayClass1_0' Class
+			
 			for (int i = 0; i < classTypes.Length; i++) {
-				if (classTypes[i].Name != "CognitionCore") {
+				// The StartsWith("<>") is in there to avoid calling the '<>c__DisplayClass1_...' class from the Debugger, if this happens an 'NullReferenceException' will be thrown
+				if (classTypes[i].Name != "CognitionCore" && !classTypes[i].Name.StartsWith("<>")) {
+
 					MethodInfo classMethod = classTypes[i].GetMethod("Cognize");
-					//Task.Factory.StartNew(() => classMethod.Invoke(null, new object[] { dialog }));
-					classMethod.Invoke(null, new object[] { dialog });
+					Task cognitionTask = new Task(() => classMethod.Invoke(null, new object[] { dialog }));
+					cognitionTask.RunSynchronously();
 				}
 			}
 		}

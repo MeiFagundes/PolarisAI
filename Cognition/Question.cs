@@ -31,7 +31,7 @@ namespace POLARIS.Cognition {
 			if (!dialog.IsVerbsEmpty && !dialog.IsPronounsEmpty) {
 
 				// isQuestion if the Pronoun is immediately after the Verb. || Example: "Do you know if..."
-				if (dialog.PronounsIndex[0] > dialog.VerbsIndex[0] && dialog.PronounsIndex[0] - dialog.VerbsIndex[0] <= 1 &&  !dialog.IsNounsEmpty && dialog.NounsIndex[0] == dialog.PronounsIndex[0] + 1) {
+				if (dialog.PronounsIndex[0] > dialog.VerbsIndex[0] && dialog.PronounsIndex[0] - dialog.VerbsIndex[0] <= 1 &&  !dialog.IsNounsEmpty) {
 					dialog.IsQuestion = true;
 					return;
 				}

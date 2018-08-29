@@ -1,5 +1,4 @@
 ﻿using System;
-using System.IO;
 using System.Linq;
 using System.Reflection;
 
@@ -17,6 +16,10 @@ namespace POLARIS {
 			  assembly.GetTypes()
 					  .Where(t => String.Equals(t.Namespace, nameSpace, StringComparison.Ordinal))
 					  .ToArray();
+		}
+
+		public static void ReachUtility(MethodBase methodBase) {
+			Console.WriteLine("Reached Method '" + methodBase.Name + "' from Class '" + methodBase.DeclaringType.Name + "'");
 		}
 	}
 }

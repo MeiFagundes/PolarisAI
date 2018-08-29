@@ -21,7 +21,9 @@ namespace POLARIS.Skills {
 				return;
 			}
 
-			if (classType.Name != "SkillsCore") {
+			// The StartsWith("<>") is in there to avoid calling the '<>c__DisplayClass1_...' class from the Debugger, if this happens an 'NullReferenceException' will be thrown
+			if (classType.Name != "SkillsCore" && !classType.Name.StartsWith("<>")) {
+
 				MethodInfo classMethod = classType.GetMethod("Execute");
 				Task.Factory.StartNew(() => classMethod.Invoke(null, new object[] { dialog }));
 			}

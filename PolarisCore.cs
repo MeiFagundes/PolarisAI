@@ -18,6 +18,7 @@ namespace POLARIS {
 				dialog.Debug();
 
 				Console.WriteLine("Type something: ");
+				
 				input = Console.ReadLine();
 				Console.Clear();
 			}
@@ -25,7 +26,7 @@ namespace POLARIS {
 
 		public static void MainPipeline(Dialog dialog) {
 
-			Task cognitionCoreTask = new Task(() => Cognition.CognitionCore.Fetch(dialog));
+			Task cognitionCoreTask = new Task(() => Cognition.CognitionCore.FetchCognition(dialog));
 			cognitionCoreTask.RunSynchronously();
 
 			if (!dialog.IsSkillsEmpty) {

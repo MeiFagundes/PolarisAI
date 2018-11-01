@@ -26,18 +26,33 @@ namespace POLARIS.Cognition {
 				dialog.IsQuestion = true;
 				return;
 			}
+            
 
-			// There has to be a Verb and a Pronoun to be a question in those cases
-			if (!dialog.IsVerbsEmpty && !dialog.IsPronounsEmpty) {
+            // There has to be a Verb and a Pronoun to be a question in those cases
+            if (!dialog.IsVerbsEmpty && !dialog.IsPronounsEmpty) {
 
-				// isQuestion if the Pronoun is immediately after the Verb. || Example: "Do you know if..."
-				if (dialog.PronounsIndex[0] > dialog.VerbsIndex[0] && dialog.PronounsIndex[0] - dialog.VerbsIndex[0] <= 1 &&  !dialog.IsNounsEmpty) {
+                // isQuestion if an Verb is immediately after an Adverb and a Pronoun is immediately after it. || Example: "How are you"
+                if (!dialog.IsAdverbsEmpty)
+                {
+                    if (dialog.AdverbsIndex[0] < dialog.VerbsIndex[0] && dialog.VerbsIndex[0] - dialog.AdverbsIndex[0] <= 2)
+                    {
+                        if (dialog.VerbsIndex[0] < dialog.PronounsIndex[0] && dialog.PronounsIndex[0] - dialog.VerbsIndex[0] <= 2)
+                        {
+                            dialog.IsQuestion = true;
+                            return;
+                        }
+                    }
+                }
+                
+
+                // isQuestion if the Pronoun is immediately after the Verb. || Example: "Do you know if..."
+                if (dialog.PronounsIndex[0] > dialog.VerbsIndex[0] && dialog.PronounsIndex[0] - dialog.VerbsIndex[0] <= 2) {
 					dialog.IsQuestion = true;
 					return;
 				}
 
-				// isQuestion if there's a (Pronoun + Verb + "know") || Example: "I Want to know if..."
-				else if (isThereAKnow && dialog.VerbsIndex[0] > dialog.PronounsIndex[0] && knowIndex > dialog.VerbsIndex[0]) {
+                // isQuestion if there's a (Pronoun + Verb + "know") || Example: "I Want to know if..."
+                else if (isThereAKnow && dialog.VerbsIndex[0] > dialog.PronounsIndex[0] && knowIndex > dialog.VerbsIndex[0]) {
 					dialog.IsQuestion = true;
 					return;
 				}

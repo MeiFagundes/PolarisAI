@@ -6,6 +6,7 @@ clear
 command
 connect
 copy
+debug
 enter
 entertain
 expand

@@ -7,17 +7,19 @@ namespace POLARIS {
 
 			Dialog dialog;
 			Vocabulary vocabulary = new Vocabulary();
-			String input = "Polaris, search this please.";
+			String input = "Polaris, can you run Crysis?";
 
 			while (true) { 
 				
 				Console.WriteLine("Input: '" + input + "'");
 				dialog = new Dialog(input, vocabulary);
-				MainPipeline(dialog);
-				vocabulary.Debug();
+				Task mainPipelineTask = new Task(() => MainPipeline(dialog));
+				mainPipelineTask.RunSynchronously();
+				mainPipelineTask.Wait();
 				dialog.Debug();
 
-				Console.WriteLine("Type something: ");
+                Console.WriteLine("Hint! Try asking: 'Search about cute kittens please'");
+				Console.Write("\n>");
 				
 				input = Console.ReadLine();
 				Console.Clear();
@@ -28,6 +30,7 @@ namespace POLARIS {
 
 			Task cognitionCoreTask = new Task(() => Cognition.CognitionCore.FetchCognition(dialog));
 			cognitionCoreTask.RunSynchronously();
+			cognitionCoreTask.Wait();
 
 			if (!dialog.IsSkillsEmpty) {
 				Task skillsCoreTask = new Task(() => Skills.SkillsCore.FetchSkill(dialog));

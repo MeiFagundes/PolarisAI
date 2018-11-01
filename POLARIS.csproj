@@ -90,6 +90,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Skills\Debug.cs" />
     <Compile Include="Skills\SkillsCore.cs" />
     <Compile Include="Skills\Search.cs" />
     <Compile Include="Utilities.cs" />

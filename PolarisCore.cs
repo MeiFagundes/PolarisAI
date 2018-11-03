@@ -13,14 +13,18 @@ namespace POLARIS {
 				
 				Console.WriteLine("Input: '" + input + "'");
 				dialog = new Dialog(input, vocabulary);
-				Task mainPipelineTask = new Task(() => MainPipeline(dialog));
-				mainPipelineTask.RunSynchronously();
-				mainPipelineTask.Wait();
-				dialog.Debug();
 
-                Console.WriteLine("Hint! Try asking: 'Search about cute kittens please'");
-				Console.Write("\n>");
-				
+                Task.Run(() => {
+                    MainPipeline(dialog);
+                    dialog.Debug();
+
+                }).ContinueWith(t => {
+
+                    Console.WriteLine("Hint! Try asking: 'Search about cute kittens please'");
+                    Console.Write("\n>");
+
+                });
+                
 				input = Console.ReadLine();
 				Console.Clear();
 			}
@@ -35,7 +39,7 @@ namespace POLARIS {
 			if (!dialog.IsSkillsEmpty) {
 				Task skillsCoreTask = new Task(() => Skills.SkillsCore.FetchSkill(dialog));
 				skillsCoreTask.RunSynchronously();
-			}
+            }
 		}
 	}
 }

@@ -6,8 +6,8 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Made with love by Mei ❤")]
-[assembly: AssemblyDescription("https://github.com/LouchDaishiteru/Polaris")]
+[assembly: AssemblyTitle("Polaris")]
+[assembly: AssemblyDescription("Made with love by Mei ❤ | https://github.com/MeiFagundes/Polaris")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("POLARIS")]

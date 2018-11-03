@@ -51,7 +51,7 @@ namespace POLARIS {
             Console.WriteLine("  Nº of Adverbs: " + Adverbs.Count);
             Console.WriteLine("  Nº of Nouns: " + Nouns.Count);
             Console.WriteLine("  Nº of Skills: " + Skills.Count);
-            Console.WriteLine("  Nº of Interrogative Pronouns: " + IntWords.Count);
+            Console.WriteLine("  Nº of Interrogative Words: " + IntWords.Count);
             Console.WriteLine("\n ----------------------------- \n");
         }
 	}

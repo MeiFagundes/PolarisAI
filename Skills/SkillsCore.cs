@@ -25,8 +25,8 @@ namespace POLARIS.Skills {
 			if (classType.Name != "SkillsCore" && !classType.Name.StartsWith("<>")) {
 
 				MethodInfo classMethod = classType.GetMethod("Execute");
-				Task.Factory.StartNew(() => classMethod.Invoke(null, new object[] { dialog }));
-			}
+                classMethod.Invoke(null, new object[] { dialog });
+            }
 		}
 	}
 }

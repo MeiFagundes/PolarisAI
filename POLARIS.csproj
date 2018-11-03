@@ -104,6 +104,9 @@
     <None Include="Resources\Icon.ico" />
     <None Include="Design\Icon.ico" />
     <None Include="CodeSnippets\ReachUtility.snippet" />
+    <None Include="Vocabulary\Interrogative Words.txt" />
+    <None Include="Vocabulary\Ignored Words.txt" />
+    <None Include="Vocabulary\Punctuation Marks.txt" />
     <Content Include="Vocabulary\Skills.txt" />
     <Content Include="Vocabulary\Adverbs.txt" />
     <Content Include="Vocabulary\Nouns.txt" />

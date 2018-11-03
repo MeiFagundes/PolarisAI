@@ -14,18 +14,24 @@ namespace POLARIS {
 		public List<String> Pronouns { get; set; } = new List<String>();
 		public List<String> Adverbs { get; set; } = new List<String>();
 		public List<String> Nouns { get; set; } = new List<String>();
-		
-		/// <summary>
-		/// Loads the vocabulary from Resources once
-		/// </summary>
-		public Vocabulary() {
+        public List<String> IntWords { get; set; } = new List<String>();
+        public List<String> IgnoredWords { get; set; } = new List<String>();
+        public List<String> PunctuationMarks { get; set; } = new List<String>();
+
+        /// <summary>
+        /// Loads the vocabulary from Resources once
+        /// </summary>
+        public Vocabulary() {
 
 			Verbs = Convert(POLARIS.Properties.Resources.Verbs);
 			Skills = Convert(POLARIS.Properties.Resources.Skills);
 			Pronouns = Convert(POLARIS.Properties.Resources.Pronouns);
 			Adverbs = Convert(POLARIS.Properties.Resources.Adverbs);
 			Nouns = Convert(POLARIS.Properties.Resources.Nouns);
-		}
+            IntWords = Convert(POLARIS.Properties.Resources.Interrogative_Words);
+            IgnoredWords = Convert(POLARIS.Properties.Resources.Ignored_Words);
+            PunctuationMarks = Convert(POLARIS.Properties.Resources.Punctuation_Marks);
+        }
 
 		/// <summary>
 		/// Converts a String resource to List<String>
@@ -39,7 +45,14 @@ namespace POLARIS {
 		}
 
 		public void Debug() {
-			Console.WriteLine("\nVocabulary Debug ->\n   Nº of Verbs: " + Verbs.Count + "\n   Nº of Pronouns: " + Pronouns.Count + "\n   Nº of Adverbs: " + Adverbs.Count + "\n");
-		}
+            Console.WriteLine("\n ------ Vocabulary Debug ------ \n");
+            Console.WriteLine("  Nº of Verbs: " + Verbs.Count);
+            Console.WriteLine("  Nº of Pronouns: " + Pronouns.Count);
+            Console.WriteLine("  Nº of Adverbs: " + Adverbs.Count);
+            Console.WriteLine("  Nº of Nouns: " + Nouns.Count);
+            Console.WriteLine("  Nº of Skills: " + Skills.Count);
+            Console.WriteLine("  Nº of Interrogative Pronouns: " + IntWords.Count);
+            Console.WriteLine("\n ----------------------------- \n");
+        }
 	}
 }

@@ -117,11 +117,57 @@ namespace POLARIS.Properties {
         ///widely
         ///recently
         ///seriously
-        ///frequentl [rest of string was truncated]&quot;;.
+        ///frequently
+        ///fully
+        ///mostly
+        ///naturally
+        ///nearly
+        ///occasionally
+        ///carefully
+        ///c [rest of string was truncated]&quot;;.
         /// </summary>
         public static string Adverbs {
             get {
                 return ResourceManager.GetString("Adverbs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to polaris
+        ///please
+        ///about.
+        /// </summary>
+        public static string Ignored_Words {
+            get {
+                return ResourceManager.GetString("Ignored_Words", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to how
+        ///what
+        ///where
+        ///which
+        ///who
+        ///whose
+        ///whom
+        ///whatever
+        ///whatsoever
+        ///whichever
+        ///whoever
+        ///whosoever
+        ///whomever
+        ///whomsoever
+        ///whosever
+        ///why
+        ///whence
+        ///whether
+        ///whither
+        ///whatsoever.
+        /// </summary>
+        public static string Interrogative_Words {
+            get {
+                return ResourceManager.GetString("Interrogative_Words", resourceCulture);
             }
         }
         
@@ -185,7 +231,16 @@ namespace POLARIS.Properties {
         ///quality
         ///development
         ///language
-        ///manageme [rest of string was truncated]&quot;;.
+        ///management
+        ///player
+        ///variety
+        ///video
+        ///week
+        ///security
+        ///country
+        ///exam
+        ///movie
+        ///or [rest of string was truncated]&quot;;.
         /// </summary>
         public static string Nouns {
             get {
@@ -241,6 +296,19 @@ namespace POLARIS.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ,
+        ///.
+        ///?
+        ///!
+        ///;.
+        /// </summary>
+        public static string Punctuation_Marks {
+            get {
+                return ResourceManager.GetString("Punctuation_Marks", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to add
         ///calculate
         ///call
@@ -249,6 +317,7 @@ namespace POLARIS.Properties {
         ///command
         ///connect
         ///copy
+        ///debug
         ///enter
         ///entertain
         ///expand
@@ -298,6 +367,7 @@ namespace POLARIS.Properties {
         ///applaud
         ///appreciate
         ///approve
+        ///are
         ///argue
         ///arrange
         ///arrest
@@ -348,7 +418,17 @@ namespace POLARIS.Properties {
         ///burn
         ///bury
         ///buzz
-        ///c [rest of string was truncated]&quot;;.
+        ///calculate
+        ///call
+        ///camp
+        ///can
+        ///care
+        ///carry
+        ///carve
+        ///cause
+        ///challenge
+        ///change
+        ///cha [rest of string was truncated]&quot;;.
         /// </summary>
         public static string Verbs {
             get {

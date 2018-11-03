@@ -15,13 +15,15 @@ namespace POLARIS {
 		public List<UInt16> AdverbsIndex { get; set; } = new List<UInt16>();
 		public List<UInt16> SkillsIndex { get; set; } = new List<UInt16>();
 		public List<UInt16> NounsIndex { get; set; } = new List<UInt16>();
+        public List<UInt16> IntWordsIndex { get; set; } = new List<UInt16>();
 
-		public Boolean IsVerbsEmpty { get; set; }
+        public Boolean IsVerbsEmpty { get; set; }
 		public Boolean IsPronounsEmpty { get; set; }
 		public Boolean IsAdverbsEmpty { get; set; }
 		public Boolean IsSkillsEmpty { get; set; }
 		public Boolean IsNounsEmpty { get; set; }
-		public Boolean IsRequest { get; set; }
+        public Boolean IsIntWordsEmpty { get; set; }
+        public Boolean IsRequest { get; set; }
 		public Boolean IsQuestion { get; set; }
 
 		// --- CONSTRUCTORS ---
@@ -32,6 +34,14 @@ namespace POLARIS {
 
 			Phrase = input.ToLower().Split(' ').ToList();
 			Phrase.RemoveAll(String.IsNullOrEmpty);
+
+
+            // Deleting all Punctuation Marks from the Phrase
+            for (int i = 0; i < Phrase.Count; i++) {
+                foreach (String pontMark in vocabulary.PunctuationMarks) {
+                    Phrase[i] = Phrase[i].Replace(pontMark, String.Empty);
+                }
+            }
 
 			// Isolating ponctuation mark as a last String
 			String lastString = Phrase[Phrase.Count - 1].Substring(Phrase[Phrase.Count - 1].Length - 1);
@@ -46,7 +56,9 @@ namespace POLARIS {
 			IsPronounsEmpty = IndexVocabulary(vocabulary.Pronouns, PronounsIndex);
 			IsAdverbsEmpty = IndexVocabulary(vocabulary.Adverbs, AdverbsIndex);
 			IsNounsEmpty = IndexVocabulary(vocabulary.Nouns, NounsIndex);
-		}
+            IsIntWordsEmpty = IndexVocabulary(vocabulary.IntWords, IntWordsIndex);
+
+        }
 		public Dialog() { }
 
 		// --- METHODS ---
@@ -70,8 +82,40 @@ namespace POLARIS {
 		} 
 
 		public void Debug() {
-			Console.WriteLine("\nDialog Debug ->\n   Is this a Request? : " + IsRequest);
-			Console.WriteLine("   Is this a Question? : " + IsQuestion + "\n");
-		}
+			Console.WriteLine("\n ------ Dialog Debug ------ \n");
+            Console.WriteLine("  Is this a Request ? : " + IsRequest);
+            Console.WriteLine("  Is this a Question? : " + IsQuestion + "\n");
+
+            List<String>[] phraseDebug = new List<String>[Phrase.Count];
+
+            for (int i = 0; i < phraseDebug.Length; i++) {
+                phraseDebug[i] = new List<String>();
+            }
+
+            for (int i = 0; i < Phrase.Count; i++) {
+                if (VerbsIndex.Exists(index => index == i))
+                    phraseDebug[i].Add("Verb");
+                if (SkillsIndex.Exists(index => index == i))
+                    phraseDebug[i].Add("Skill");
+                if (PronounsIndex.Exists(index => index == i))
+                    phraseDebug[i].Add("Pronoun");
+                if (AdverbsIndex.Exists(index => index == i))
+                    phraseDebug[i].Add("Adverb");
+                if (NounsIndex.Exists(index => index == i))
+                    phraseDebug[i].Add("Noun");
+                if (IntWordsIndex.Exists(index => index == i))
+                    phraseDebug[i].Add("Interrogative Word");
+            }
+
+            for (int i = 0; i < phraseDebug.Length; i++) {
+
+                Console.Write("  '" + Phrase[i] + "' -> ");
+                foreach (String type in phraseDebug[i]) {
+                    Console.Write(type + "; ");
+                }
+                Console.WriteLine();
+            }
+            Console.WriteLine("\n -------------------------- \n");
+        }
 	}
 }

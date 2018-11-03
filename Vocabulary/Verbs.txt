@@ -276,6 +276,7 @@ introduce
 invent
 invite
 irritate
+is
 itch
 jail
 jam
@@ -460,6 +461,7 @@ rot
 rub
 ruin
 rule
+run
 rush
 sack
 sail

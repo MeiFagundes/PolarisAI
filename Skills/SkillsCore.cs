@@ -17,7 +17,6 @@ namespace PolarisCore.Skills {
 			Type classType = Type.GetType("PolarisCore.Skills." + skillName);
 
 			if (classType == null) {
-				Console.WriteLine("WARNING!: Skill '" + skillName + "' recognized but not yet implemented.");
                 d.IsRequestingUnimplementedSkill = true;
 				return;
 			}

@@ -1,5 +1,4 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -95,12 +94,18 @@ namespace PolarisCore {
 
         public String ToJson() {
 
-            Output o = new Output {
+            return "{" +
+                "\"Code\":" + Code + "," +
+                "\"Response\":" + (Response == String.Empty || Response == null ? "null" : "\"" + Response + "\"") + "," +
+                "\"ResponseData\":" + (ResponseData == String.Empty || ResponseData == null ? "null" : "\"" + ResponseData + "\"") +
+                "}";
+
+            /*Output o = new Output {
                 Code = this.Code,
                 Response = this.Response,
                 ResponseData = this.ResponseData
             };
-            return JsonConvert.SerializeObject(o);
+            return JsonConvert.SerializeObject(o);*/
         }
 
 		public void Debug() {
@@ -137,10 +142,12 @@ namespace PolarisCore {
                 }
                 Console.WriteLine();
             }
+            Console.WriteLine("\n  JSON Output: " + ToJson());
+
             Console.WriteLine("\n -------------------------- \n");
         }
 
-        private class Output {
+        /*private class Output {
 
             public Output() { }
 
@@ -148,6 +155,6 @@ namespace PolarisCore {
             public String Response { get; set; }
             public String ResponseData { get; set; }
 
-        }
+        }*/
     }
 }

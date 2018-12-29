@@ -9,7 +9,7 @@ namespace PolarisCore.Response {
 
         public static void SetResponse(Dialog d) {
 
-            if (d.Phrase.Exists(t => t.Equals("you"))) {
+            if (d.Phrase.Exists(t => t.Equals("can"))) {
 
                 d.Response = "Well, maybe I can. I don't know it yet...";
                 return;

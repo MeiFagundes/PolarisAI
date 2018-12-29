@@ -10,7 +10,7 @@ namespace PolarisCore {
 
             if (args == null || args.Length == 0) {
 
-                String input = "Polaris, can you run Crysis?";
+                String input = "Polaris, how are you right now?";
 
                 while (true) {
                     // Test Mode
@@ -22,7 +22,7 @@ namespace PolarisCore {
                     Task.Run(() => {
                         MainPipeline(dialog);
                         dialog.Debug();
-                        Console.WriteLine("Response: " + dialog.Response);
+                        Console.WriteLine("Response (Alpha): " + dialog.Response);
 
                     }).ContinueWith(t => {
 

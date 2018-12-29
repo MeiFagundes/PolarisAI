@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Linq;
 using System.Reflection;
-using System.Threading.Tasks;
 
 namespace PolarisCore.Skills {
-	public static class SkillsCore {
+	public static class SkillsController {
         
 		/// <summary>
 		/// Fetches and executes the 'Execute' Method from the respective Class named after the Skill found in the Dialog object inside the 'Skills' Namespace
@@ -22,7 +21,7 @@ namespace PolarisCore.Skills {
 			}
 
 			// The StartsWith("<>") is in there to avoid calling the '<>c__DisplayClass1_...' class from the Debugger, if this happens an 'NullReferenceException' will be thrown
-			if (classType.Name != "SkillsCore" && !classType.Name.StartsWith("<>")) {
+			if (classType.Name != "SkillsController" && !classType.Name.StartsWith("<>")) {
 
 				MethodInfo classMethod = classType.GetMethod("Execute");
                 classMethod.Invoke(null, new object[] { d });

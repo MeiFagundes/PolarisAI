@@ -1,11 +1,12 @@
-﻿using System;
+﻿using PolarisCore.Vocabulary;
+using System;
 using System.Threading.Tasks;
 
 namespace PolarisCore {
 	class PolarisCore {
 		public static void Main(string[] args) {
             
-			Vocabulary vocabulary = new Vocabulary();
+			VocabularyModel vocabulary = new VocabularyModel();
             Dialog dialog;
 
             if (args == null || args.Length == 0) {
@@ -46,18 +47,18 @@ namespace PolarisCore {
 		public static void MainPipeline(Dialog dialog) {
 
             // Executing Cognition pipeline
-			Task cognitionCoreTask = new Task(() => Cognition.CognitionCore.FetchCognition(dialog));
+			Task cognitionCoreTask = new Task(() => Cognitions.CognitionsController.FetchCognition(dialog));
 			cognitionCoreTask.RunSynchronously();
 			cognitionCoreTask.Wait();
 
             // Try and executing Skills
             if (!dialog.IsSkillsEmpty) {
-				Task skillsCoreTask = new Task(() => Skills.SkillsCore.FetchSkill(dialog));
+				Task skillsCoreTask = new Task(() => Skills.SkillsController.FetchSkill(dialog));
 				skillsCoreTask.RunSynchronously();
             }
 
             // Generating a response
-            Task responseCoreTask = new Task(() => Response.ResponseCore.GenerateResponse(dialog));
+            Task responseCoreTask = new Task(() => Responses.ResponseController.GenerateResponse(dialog));
             responseCoreTask.RunSynchronously();
         }
 	}

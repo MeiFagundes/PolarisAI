@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PolarisCore.Vocabulary;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -7,7 +8,7 @@ namespace PolarisCore {
 
 		// --- VARIABLES ---
 
-		public Vocabulary vocabulary;
+		public VocabularyModel vocabulary;
         
 		public List<String> Phrase { get; set; } = new List<String>();
 		public List<Byte> VerbsIndex { get; set; } = new List<Byte>();
@@ -16,6 +17,13 @@ namespace PolarisCore {
 		public List<Byte> SkillsIndex { get; set; } = new List<Byte>();
 		public List<Byte> NounsIndex { get; set; } = new List<Byte>();
         public List<Byte> IntWordsIndex { get; set; } = new List<Byte>();
+
+        public String FirstVerb { get; set; }
+        public String FirstPronoun { get; set; }
+        public String FirstAdverb { get; set; }
+        public String FirstSkill { get; set; }
+        public String FirstNoun { get; set; }
+        public String FirstIntWord { get; set; }
 
         public Boolean IsVerbsEmpty { get; set; }
 		public Boolean IsPronounsEmpty { get; set; }
@@ -39,7 +47,7 @@ namespace PolarisCore {
 
         // --- CONSTRUCTORS ---
 
-        public Dialog(String input, Vocabulary vocabularyIn) {
+        public Dialog(String input, VocabularyModel vocabularyIn) {
 
 			this.vocabulary = vocabularyIn;
 
@@ -62,25 +70,26 @@ namespace PolarisCore {
 				Phrase.Add(dot);
 			}
 			
-			IsSkillsEmpty = IndexVocabulary(vocabulary.Skills, SkillsIndex);
-			IsVerbsEmpty = IndexVocabulary(vocabulary.Verbs, VerbsIndex);
-			IsPronounsEmpty = IndexVocabulary(vocabulary.Pronouns, PronounsIndex);
-			IsAdverbsEmpty = IndexVocabulary(vocabulary.Adverbs, AdverbsIndex);
-			IsNounsEmpty = IndexVocabulary(vocabulary.Nouns, NounsIndex);
-            IsIntWordsEmpty = IndexVocabulary(vocabulary.IntWords, IntWordsIndex);
+			IsSkillsEmpty = IndexInput(vocabulary.Skills, SkillsIndex, FirstSkill);
+			IsVerbsEmpty = IndexInput(vocabulary.Verbs, VerbsIndex, FirstVerb);
+			IsPronounsEmpty = IndexInput(vocabulary.Pronouns, PronounsIndex, FirstPronoun);
+			IsAdverbsEmpty = IndexInput(vocabulary.Adverbs, AdverbsIndex, FirstAdverb);
+			IsNounsEmpty = IndexInput(vocabulary.Nouns, NounsIndex, FirstNoun);
+            IsIntWordsEmpty = IndexInput(vocabulary.IntWords, IntWordsIndex, FirstIntWord);
 
         }
 		public Dialog() { }
 
-		// --- METHODS ---
+        // --- METHODS ---
 
-		/// <summary>
-		/// Stores Vocabulary elements and their indexes
-		/// </summary>
-		/// <param name="VocabularyFile"></param>
-		/// <param name="Indexes"></param>
-		/// <returns></returns>
-		private Boolean IndexVocabulary(List<String> VocabularyFile, List<Byte> Indexes) {
+        /// <summary>
+        /// Stores Vocabulary elements, their indexes and first-of-type pointers
+        /// </summary>
+        /// <param name="VocabularyFile"></param>
+        /// <param name="Indexes"></param>
+        /// <param name="FirstOfTypePointer"></param>
+        /// <returns></returns>
+        private Boolean IndexInput(List<String> VocabularyFile, List<Byte> Indexes, String FirstOfTypePointer) {
 
 			for (Byte i = 0; i < Phrase.Count; i++) {
 				foreach (String currentFile in VocabularyFile) {
@@ -89,8 +98,51 @@ namespace PolarisCore {
 					}
 				}
 			}
+
+            if (Indexes.Any())
+                FirstOfTypePointer = Phrase[Indexes[0]];
+
 			return !Indexes.Any();
 		}
+
+        public Boolean Contains(String word) {
+            return Phrase.Exists(t => t.Equals(word));
+        }
+
+        public Byte? GetFirstOccurrenceIndex(String word) {
+
+            for (Byte i = 0; i < Phrase.Count; i++) {
+                if (word.Equals(Phrase[i]))
+                    return i;
+            }
+            return null;
+        }
+
+        /// <summary>
+        /// Calculates the first Word position minus the second Word.
+        ///     Negative values: First word comes before.
+        ///     Positive values: First word comes after.
+        ///     Zero: The words are the same.
+        /// </summary>
+        /// <param name="firstWord"></param>
+        /// <param name="secondWord"></param>
+        /// <returns></returns>
+        public Int16? GetPositionDifference(String firstWord, String secondWord) {
+
+            if (Contains(firstWord) && Contains(secondWord)) {
+
+                return (Int16)(GetFirstOccurrenceIndex(firstWord) - GetFirstOccurrenceIndex(secondWord));
+            }
+            return null;
+        }
+
+        public Boolean ComesFirst(String firstWord, String secondWord) {
+            return GetPositionDifference(firstWord, secondWord) < 0;
+        }
+
+        public Boolean ComesAfter(String firstWord, String secondWord) {
+            return GetPositionDifference(firstWord, secondWord) > 0;
+        }
 
         public String ToJson() {
 
@@ -99,13 +151,6 @@ namespace PolarisCore {
                 "\"Response\":" + (Response == String.Empty || Response == null ? "null" : "\"" + Response + "\"") + "," +
                 "\"ResponseData\":" + (ResponseData == String.Empty || ResponseData == null ? "null" : "\"" + ResponseData + "\"") +
                 "}";
-
-            /*Output o = new Output {
-                Code = this.Code,
-                Response = this.Response,
-                ResponseData = this.ResponseData
-            };
-            return JsonConvert.SerializeObject(o);*/
         }
 
 		public void Debug() {
@@ -147,7 +192,7 @@ namespace PolarisCore {
             Console.WriteLine("\n -------------------------- \n");
         }
 
-        /*private class Output {
+        private class Output {
 
             public Output() { }
 
@@ -155,6 +200,6 @@ namespace PolarisCore {
             public String Response { get; set; }
             public String ResponseData { get; set; }
 
-        }*/
+        }
     }
 }

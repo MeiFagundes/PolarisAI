@@ -22,9 +22,15 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>5</ApplicationRevision>
+    <TargetCulture>en-US</TargetCulture>
+    <ProductName>Polaris Core</ProductName>
+    <PublisherName>Mei Fagundes</PublisherName>
+    <SuiteName>Polaris</SuiteName>
+    <AutorunEnabled>true</AutorunEnabled>
+    <ApplicationRevision>7</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
+    <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
@@ -38,9 +44,10 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <PlatformTarget>x64</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -48,19 +55,19 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject>PolarisCore.PolarisCore</StartupObject>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>Design\Icon.ico</ApplicationIcon>
+    <ApplicationIcon>Resources\Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>8D6BD845DACA1BFDBFE81975178DD883B7822D90</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>D4170B562E55561B31717A8264D65ACD5A0D051F</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>POLARIS_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestKeyFile>PolarisCore_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <GenerateManifests>true</GenerateManifests>
@@ -68,10 +75,13 @@
   <PropertyGroup>
     <SignManifests>true</SignManifests>
   </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>PolarisCore_TemporaryKey.pfx</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>packages\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
@@ -83,9 +93,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Cognition\CognitionCore.cs" />
-    <Compile Include="Cognition\Question.cs" />
-    <Compile Include="Cognition\Request.cs" />
+    <Compile Include="Cognitions\CognitionsController.cs" />
+    <Compile Include="Cognitions\Question.cs" />
+    <Compile Include="Cognitions\Request.cs" />
     <Compile Include="PolarisCore.cs" />
     <Compile Include="Dialog.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -94,32 +104,32 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Response\Question.cs" />
-    <Compile Include="Response\Request.cs" />
-    <Compile Include="Response\ResponseCore.cs" />
+    <Compile Include="Responses\Question.cs" />
+    <Compile Include="Responses\Request.cs" />
+    <Compile Include="Responses\ResponseController.cs" />
     <Compile Include="Skills\Debug.cs" />
-    <Compile Include="Skills\SkillsCore.cs" />
+    <Compile Include="Skills\SkillsController.cs" />
     <Compile Include="Skills\Search.cs" />
-    <Compile Include="Utilities.cs" />
-    <Compile Include="Vocabulary.cs" />
+    <Compile Include="Utilities\Reflection.cs" />
+    <Compile Include="Vocabulary\VocabularyModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="PolarisCore_TemporaryKey.pfx" />
     <None Include="POLARIS_TemporaryKey.pfx" />
     <None Include="Resources\Icon.ico" />
-    <None Include="Design\Icon.ico" />
     <None Include="CodeSnippets\ReachUtility.snippet" />
-    <None Include="Vocabulary\Interrogative Words.txt" />
-    <None Include="Vocabulary\Ignored Words.txt" />
-    <None Include="Vocabulary\Punctuation Marks.txt" />
-    <Content Include="Vocabulary\Skills.txt" />
-    <Content Include="Vocabulary\Adverbs.txt" />
-    <Content Include="Vocabulary\Nouns.txt" />
-    <Content Include="Vocabulary\Pronouns.txt" />
-    <Content Include="Vocabulary\Verbs.txt" />
+    <None Include="Vocabulary\VocabularyResources\Interrogative_Words.txt" />
+    <None Include="Vocabulary\VocabularyResources\Ignored_Words.txt" />
+    <None Include="Vocabulary\VocabularyResources\Punctuation_Marks.txt" />
+    <Content Include="Vocabulary\VocabularyResources\Skills.txt" />
+    <Content Include="Vocabulary\VocabularyResources\Adverbs.txt" />
+    <Content Include="Vocabulary\VocabularyResources\Nouns.txt" />
+    <Content Include="Vocabulary\VocabularyResources\Pronouns.txt" />
+    <Content Include="Vocabulary\VocabularyResources\Verbs.txt" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">

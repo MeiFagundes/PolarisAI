@@ -2,26 +2,26 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace PolarisCore {
+namespace PolarisCore.Vocabulary {
 
 	/// <summary>
 	/// Model Class that loads the vocabulary from Resources
 	/// </summary>
-	public class Vocabulary {
+	public class VocabularyModel {
 
-		public List<String> Verbs { get; set; } = new List<String>();
-		public List<String> Skills { get; set; } = new List<String>();
-		public List<String> Pronouns { get; set; } = new List<String>();
-		public List<String> Adverbs { get; set; } = new List<String>();
-		public List<String> Nouns { get; set; } = new List<String>();
-        public List<String> IntWords { get; set; } = new List<String>();
-        public List<String> IgnoredWords { get; set; } = new List<String>();
-        public List<String> PunctuationMarks { get; set; } = new List<String>();
+		public List<String> Verbs { get; } = new List<String>();
+		public List<String> Skills { get; } = new List<String>();
+		public List<String> Pronouns { get; } = new List<String>();
+		public List<String> Adverbs { get; } = new List<String>();
+		public List<String> Nouns { get; } = new List<String>();
+        public List<String> IntWords { get; } = new List<String>();
+        public List<String> IgnoredWords { get; } = new List<String>();
+        public List<String> PunctuationMarks { get; } = new List<String>();
 
         /// <summary>
         /// Loads the vocabulary from Resources once
         /// </summary>
-        public Vocabulary() {
+        public VocabularyModel() {
 
 			Verbs = Convert(Properties.Resources.Verbs);
 			Skills = Convert(Properties.Resources.Skills);

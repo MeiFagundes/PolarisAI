@@ -172,7 +172,8 @@ namespace PolarisCore.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to people
+        ///   Looks up a localized string similar to polaris
+        ///people
         ///history
         ///way
         ///art
@@ -239,8 +240,7 @@ namespace PolarisCore.Properties {
         ///security
         ///country
         ///exam
-        ///movie
-        ///or [rest of string was truncated]&quot;;.
+        /// [rest of string was truncated]&quot;;.
         /// </summary>
         public static string Nouns {
             get {

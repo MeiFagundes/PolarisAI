@@ -2,8 +2,8 @@
 using System.Linq;
 using System.Reflection;
 
-namespace PolarisCore {
-	public static class Utilities {
+namespace PolarisCore.Utilities {
+	public static class Reflection {
 
 		/// <summary>
 		/// Returns all the Types from the current assembly found in a Namespace

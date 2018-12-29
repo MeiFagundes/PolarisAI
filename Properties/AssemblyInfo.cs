@@ -6,12 +6,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Polaris")]
-[assembly: AssemblyDescription("Made with love by Mei ❤ | https://github.com/MeiFagundes/Polaris")]
+[assembly: AssemblyTitle("PolarisCore")]
+[assembly: AssemblyDescription("Made with love by Mei ❤ | https://github.com/MeiFagundes/Polaris-Core")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("POLARIS")]
-[assembly: AssemblyCopyright("Copyright ©  2018")]
+[assembly: AssemblyCopyright("Copyright ©  2019")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

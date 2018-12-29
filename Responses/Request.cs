@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace PolarisCore.Response {
+namespace PolarisCore.Responses {
     public static class Request {
         public static void SetResponse(Dialog d) {
 

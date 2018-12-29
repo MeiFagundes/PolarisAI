@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace POLARIS.Cognition {
+namespace PolarisCore.Cognition {
 
 	public static class Request {
 

@@ -1,23 +1,23 @@
 ﻿using System;
 
-namespace POLARIS.Skills
+namespace PolarisCore.Skills
 {
 	public static class Debug{
-		public static void Execute(Dialog dialog) {
+		public static void Execute(Dialog d) {
 
-			switch (dialog.Phrase[dialog.SkillsIndex[0] + 1]){
+			switch (d.Phrase[d.SkillsIndex[0] + 1]){
 
 				case "cognition":
-					dialog.Debug();
+					d.Debug();
 					break;
 
 				case "vocabulary":
-					dialog.vocabulary.Debug();
+					d.vocabulary.Debug();
 					break;
 
 				default:
 					Console.WriteLine("Sorry, there's no Debug argument named '"
-                        + dialog.Phrase[dialog.SkillsIndex[0] + 1] + "', maybe you misspelled it.");
+                        + d.Phrase[d.SkillsIndex[0] + 1] + "', maybe you misspelled it.");
 					break;
 			}
 		}

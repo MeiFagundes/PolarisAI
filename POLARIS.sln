@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27703.2018
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "POLARIS", "POLARIS.csproj", "{C89AA286-91C0-4077-97A3-782C51686C31}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PolarisCore", "PolarisCore.csproj", "{C89AA286-91C0-4077-97A3-782C51686C31}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

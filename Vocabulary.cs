@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace POLARIS {
+namespace PolarisCore {
 
 	/// <summary>
 	/// Model Class that loads the vocabulary from Resources
@@ -23,14 +23,14 @@ namespace POLARIS {
         /// </summary>
         public Vocabulary() {
 
-			Verbs = Convert(POLARIS.Properties.Resources.Verbs);
-			Skills = Convert(POLARIS.Properties.Resources.Skills);
-			Pronouns = Convert(POLARIS.Properties.Resources.Pronouns);
-			Adverbs = Convert(POLARIS.Properties.Resources.Adverbs);
-			Nouns = Convert(POLARIS.Properties.Resources.Nouns);
-            IntWords = Convert(POLARIS.Properties.Resources.Interrogative_Words);
-            IgnoredWords = Convert(POLARIS.Properties.Resources.Ignored_Words);
-            PunctuationMarks = Convert(POLARIS.Properties.Resources.Punctuation_Marks);
+			Verbs = Convert(Properties.Resources.Verbs);
+			Skills = Convert(Properties.Resources.Skills);
+			Pronouns = Convert(Properties.Resources.Pronouns);
+			Adverbs = Convert(Properties.Resources.Adverbs);
+			Nouns = Convert(Properties.Resources.Nouns);
+            IntWords = Convert(Properties.Resources.Interrogative_Words);
+            IgnoredWords = Convert(Properties.Resources.Ignored_Words);
+            PunctuationMarks = Convert(Properties.Resources.Punctuation_Marks);
         }
 
 		/// <summary>

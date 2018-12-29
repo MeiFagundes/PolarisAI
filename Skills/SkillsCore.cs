@@ -3,21 +3,22 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 
-namespace POLARIS.Skills {
+namespace PolarisCore.Skills {
 	public static class SkillsCore {
-
+        
 		/// <summary>
 		/// Fetches and executes the 'Execute' Method from the respective Class named after the Skill found in the Dialog object inside the 'Skills' Namespace
 		/// </summary>
-		/// <param name="dialog"></param>
-		public static void FetchSkill(Dialog dialog) {
+		/// <param name="d"></param>
+		public static void FetchSkill(Dialog d) {
 
-			String skillName = dialog.Phrase[dialog.SkillsIndex[0]];
+			String skillName = d.Phrase[d.SkillsIndex[0]];
 			skillName = skillName.First().ToString().ToUpper() + skillName.Substring(1);
-			Type classType = Type.GetType("POLARIS.Skills." + skillName);
+			Type classType = Type.GetType("PolarisCore.Skills." + skillName);
 
 			if (classType == null) {
 				Console.WriteLine("WARNING!: Skill '" + skillName + "' recognized but not yet implemented.");
+                d.IsRequestingUnimplementedSkill = true;
 				return;
 			}
 
@@ -25,7 +26,7 @@ namespace POLARIS.Skills {
 			if (classType.Name != "SkillsCore" && !classType.Name.StartsWith("<>")) {
 
 				MethodInfo classMethod = classType.GetMethod("Execute");
-                classMethod.Invoke(null, new object[] { dialog });
+                classMethod.Invoke(null, new object[] { d });
             }
 		}
 	}

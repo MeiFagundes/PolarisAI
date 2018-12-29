@@ -221,6 +221,7 @@ frighten
 fry
 gather
 gaze
+give
 glow
 glue
 grab

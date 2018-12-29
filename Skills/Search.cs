@@ -1,25 +1,27 @@
 ﻿using System;
 
-namespace POLARIS.Skills {
+namespace PolarisCore.Skills {
 	public static class Search {
 		
         /// <summary>
         /// Searches something on Google in the Default browser.
         /// </summary>
-        /// <param name="dialog"></param>
-		public static void Execute(Dialog dialog){
+        /// <param name="d"></param>
+		public static void Execute(Dialog d){
 
-            if (dialog.Phrase[dialog.VerbsIndex[0] + 1] == "about")
-                dialog.Phrase.Remove("about");
+            if (d.Phrase[d.VerbsIndex[0] + 1] == "about")
+                d.Phrase.Remove("about");
 
-            if (dialog.Phrase[dialog.Phrase.Count - 1] == "please")
-                dialog.Phrase.Remove("please");
+            if (d.Phrase[d.Phrase.Count - 1] == "please")
+                d.Phrase.Remove("please");
 
             // Formatting search query to insert it into google search parameters
-            String search = String.Join("+",
-                dialog.Phrase.GetRange(dialog.VerbsIndex[0] + 1, dialog.Phrase.Count - 1));
+            String search = String.Join(" ",
+                d.Phrase.GetRange(d.VerbsIndex[0] + 1, d.Phrase.Count - 1));
 
-            System.Diagnostics.Process.Start("http://google.com/search?q=" + search);
+            d.Response = "Alright! Searching '" + search + "' for you.";
+            
+            System.Diagnostics.Process.Start("http://google.com/search?q=" + search.Replace(" ", "+"));
         }
 	}
 }

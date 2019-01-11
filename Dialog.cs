@@ -61,14 +61,15 @@ namespace PolarisCore {
                     Phrase[i] = Phrase[i].Replace(pontMark, String.Empty);
                 }
             }
+            Phrase.RemoveAll(t => t == String.Empty);
 
-			// Isolating ponctuation mark as a last String
-			String lastString = Phrase[Phrase.Count - 1].Substring(Phrase[Phrase.Count - 1].Length - 1);
+            // Isolating ponctuation mark as a last String
+			/*String lastString = Phrase[Phrase.Count - 1].Substring(Phrase[Phrase.Count - 1].Length - 1);
 			if (lastString.Substring(lastString.Length - 1) == "?" || lastString.Substring(lastString.Length - 1) == "." || lastString.Substring(lastString.Length - 1) == "!") {
 				String dot = lastString.Substring(lastString.Length - 1);
 				Phrase[Phrase.Count - 1].Remove(Phrase[Phrase.Count - 1].Length - 1);
 				Phrase.Add(dot);
-			}
+			}*/
 			
 			IsSkillsEmpty = IndexInput(vocabulary.Skills, SkillsIndex, FirstSkill);
 			IsVerbsEmpty = IndexInput(vocabulary.Verbs, VerbsIndex, FirstVerb);

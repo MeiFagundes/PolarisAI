@@ -19,10 +19,10 @@ namespace PolarisCore.Properties {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class Resources {
+    internal class Resources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace PolarisCore.Properties {
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        public static global::System.Resources.ResourceManager ResourceManager {
+        internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("PolarisCore.Properties.Resources", typeof(Resources).Assembly);
@@ -51,7 +51,7 @@ namespace PolarisCore.Properties {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        public static global::System.Globalization.CultureInfo Culture {
+        internal static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -126,7 +126,7 @@ namespace PolarisCore.Properties {
         ///carefully
         ///c [rest of string was truncated]&quot;;.
         /// </summary>
-        public static string Adverbs {
+        internal static string Adverbs {
             get {
                 return ResourceManager.GetString("Adverbs", resourceCulture);
             }
@@ -137,7 +137,7 @@ namespace PolarisCore.Properties {
         ///please
         ///about.
         /// </summary>
-        public static string Ignored_Words {
+        internal static string Ignored_Words {
             get {
                 return ResourceManager.GetString("Ignored_Words", resourceCulture);
             }
@@ -165,7 +165,7 @@ namespace PolarisCore.Properties {
         ///whither
         ///whatsoever.
         /// </summary>
-        public static string Interrogative_Words {
+        internal static string Interrogative_Words {
             get {
                 return ResourceManager.GetString("Interrogative_Words", resourceCulture);
             }
@@ -242,7 +242,7 @@ namespace PolarisCore.Properties {
         ///exam
         /// [rest of string was truncated]&quot;;.
         /// </summary>
-        public static string Nouns {
+        internal static string Nouns {
             get {
                 return ResourceManager.GetString("Nouns", resourceCulture);
             }
@@ -289,7 +289,7 @@ namespace PolarisCore.Properties {
         ///theirs
         ///themselves.
         /// </summary>
-        public static string Pronouns {
+        internal static string Pronouns {
             get {
                 return ResourceManager.GetString("Pronouns", resourceCulture);
             }
@@ -302,7 +302,7 @@ namespace PolarisCore.Properties {
         ///!
         ///;.
         /// </summary>
-        public static string Punctuation_Marks {
+        internal static string Punctuation_Marks {
             get {
                 return ResourceManager.GetString("Punctuation_Marks", resourceCulture);
             }
@@ -340,7 +340,7 @@ namespace PolarisCore.Properties {
         ///test
         ///turn.
         /// </summary>
-        public static string Skills {
+        internal static string Skills {
             get {
                 return ResourceManager.GetString("Skills", resourceCulture);
             }
@@ -430,7 +430,7 @@ namespace PolarisCore.Properties {
         ///change
         ///cha [rest of string was truncated]&quot;;.
         /// </summary>
-        public static string Verbs {
+        internal static string Verbs {
             get {
                 return ResourceManager.GetString("Verbs", resourceCulture);
             }

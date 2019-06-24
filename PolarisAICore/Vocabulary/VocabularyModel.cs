@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace PolarisCore.Vocabulary {
+namespace PolarisAICore.Vocabulary {
 
 	/// <summary>
 	/// Model Class that loads the vocabulary from Resources

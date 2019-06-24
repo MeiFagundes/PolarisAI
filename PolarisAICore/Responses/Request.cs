@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PolarisCore.Responses {
+namespace PolarisAICore.Responses {
     public static class Request {
         public static void SetResponse(Dialog d) {
 

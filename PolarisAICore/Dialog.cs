@@ -1,9 +1,9 @@
-﻿using PolarisCore.Vocabulary;
+﻿using PolarisAICore.Vocabulary;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace PolarisCore {
+namespace PolarisAICore {
 	public class Dialog {
 
 		// --- VARIABLES ---
@@ -154,10 +154,12 @@ namespace PolarisCore {
                 "}";
         }
 
-		public void Debug() {
-			Console.WriteLine("\n ------ Dialog Debug ------ \n");
-            Console.WriteLine("  Is this a Request?  : " + IsRequest);
-            Console.WriteLine("  Is this a Question? : " + IsQuestion + "\n");
+		public string GetDebugInfo() {
+
+            string debugInfo = "";
+			debugInfo += "\n ------ Dialog Debug ------ \n\n";
+            debugInfo += "  Is this a Request?  : " + IsRequest + "\n";
+            debugInfo += "  Is this a Question? : " + IsQuestion + "\n\n";
 
             List<String>[] phraseDebug = new List<String>[Phrase.Count];
 
@@ -182,15 +184,17 @@ namespace PolarisCore {
 
             for (int i = 0; i < phraseDebug.Length; i++) {
 
-                Console.Write("  '" + Phrase[i] + "' -> ");
+                debugInfo += "  '" + Phrase[i] + "' -> ";
                 foreach (String type in phraseDebug[i]) {
-                    Console.Write(type + "; ");
+                    debugInfo += type + "; ";
                 }
-                Console.WriteLine();
+                debugInfo += "\n";
             }
-            Console.WriteLine("\n  JSON Output: " + ToJson());
+            debugInfo += "\n  JSON Output: " + ToJson() + "\n";
 
-            Console.WriteLine("\n -------------------------- \n");
+            debugInfo += "\n -------------------------- \n\n";
+
+            return debugInfo;
         }
 
         private class Output {

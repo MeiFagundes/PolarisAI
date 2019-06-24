@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Reflection;
 
-namespace PolarisCore.Utilities {
+namespace PolarisAICore.Utilities {
 	public static class Reflection {
 
 		/// <summary>

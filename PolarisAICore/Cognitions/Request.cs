@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PolarisCore.Cognitions {
+namespace PolarisAICore.Cognitions {
 
 	public static class Request {
 
@@ -13,10 +13,15 @@ namespace PolarisCore.Cognitions {
             // There has to be a Verb to be a Request and it has to be up to the third word.
             if (!d.IsVerbsEmpty && d.VerbsIndex[0] < 3) {
 
-                if (!d.IsPronounsEmpty){
-                    // isRequest if an "you" is succeeded almost immediately by a Skill.
+                // isRequest if the first word represents a skill.
+                if (!d.IsSkillsEmpty && d.SkillsIndex[0] <= 2) {
+                    d.IsRequest = true;
+                    return;
+                }
 
-                    if (d.Contains("you")) {
+                if (!d.IsPronounsEmpty){
+
+                    /*if (d.Contains("you")) {
 
                         for (Byte i = 0; i < d.SkillsIndex.Count; i++) {
                             Byte differenceTemp = (Byte)(d.SkillsIndex[i] - d.GetFirstOccurrenceIndex("you"));
@@ -25,10 +30,10 @@ namespace PolarisCore.Cognitions {
                                 return;
                             }
                         }
-                    }
+                    }*/
 
                     // isRequest if the Pronoun is (not immediately) after the Verb
-				    if (d.PronounsIndex[0] > d.VerbsIndex[0] && d.PronounsIndex[0] - d.VerbsIndex[0] > 3){
+                    if (d.PronounsIndex[0] > d.VerbsIndex[0] && d.PronounsIndex[0] - d.VerbsIndex[0] > 3){
                         d.IsRequest = true;
                         return;
                     }

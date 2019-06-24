@@ -1,0 +1,32 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <StartupObject></StartupObject>
+    <ApplicationIcon />
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Vocabulary\VocabularyResources\Adverbs.txt" />
+    <None Remove="Vocabulary\VocabularyResources\Ignored_Words.txt" />
+    <None Remove="Vocabulary\VocabularyResources\Interrogative_Words.txt" />
+    <None Remove="Vocabulary\VocabularyResources\Nouns.txt" />
+    <None Remove="Vocabulary\VocabularyResources\Pronouns.txt" />
+    <None Remove="Vocabulary\VocabularyResources\Punctuation_Marks.txt" />
+    <None Remove="Vocabulary\VocabularyResources\Skills.txt" />
+    <None Remove="Vocabulary\VocabularyResources\Verbs.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Vocabulary\VocabularyResources\Adverbs.txt" />
+    <Resource Include="Vocabulary\VocabularyResources\Ignored_Words.txt" />
+    <Resource Include="Vocabulary\VocabularyResources\Interrogative_Words.txt" />
+    <Resource Include="Vocabulary\VocabularyResources\Nouns.txt" />
+    <Resource Include="Vocabulary\VocabularyResources\Pronouns.txt" />
+    <Resource Include="Vocabulary\VocabularyResources\Punctuation_Marks.txt" />
+    <Resource Include="Vocabulary\VocabularyResources\Skills.txt" />
+    <Resource Include="Vocabulary\VocabularyResources\Verbs.txt" />
+  </ItemGroup>
+
+</Project>

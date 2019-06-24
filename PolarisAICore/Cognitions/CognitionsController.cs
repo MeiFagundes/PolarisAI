@@ -2,7 +2,7 @@
 using System.Reflection;
 using System.Threading.Tasks;
 
-namespace PolarisCore.Cognitions {
+namespace PolarisAICore.Cognitions {
 	public static class CognitionsController {
 
 		/// <summary>
@@ -11,7 +11,7 @@ namespace PolarisCore.Cognitions {
 		/// <param name="dialog"></param>
 		public static void FetchCognition(Dialog dialog) {
 
-			Type[] classTypes = Utilities.Reflection.GetTypesInNamespace(Assembly.GetExecutingAssembly(), "PolarisCore.Cognitions");
+			Type[] classTypes = Utilities.Reflection.GetTypesInNamespace(Assembly.GetExecutingAssembly(), "PolarisAICore.Cognitions");
 			
 			for (int i = 0; i < classTypes.Length; i++) {
 				// The StartsWith("<>") is in there to avoid calling the '<>c__DisplayClass1_...' class from the Debugger, if this happens an 'NullReferenceException' will be thrown

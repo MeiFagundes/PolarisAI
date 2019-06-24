@@ -1,4 +1,4 @@
-﻿namespace PolarisCore.Responses {
+﻿namespace PolarisAICore.Responses {
     public static class ResponseController {
 
         public static void GenerateResponse(Dialog d) {

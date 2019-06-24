@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Reflection;
 
-namespace PolarisCore.Skills {
+namespace PolarisAICore.Skills {
 	public static class SkillsController {
         
 		/// <summary>

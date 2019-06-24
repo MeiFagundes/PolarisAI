@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PolarisCore.Skills {
+namespace PolarisAICore.Skills {
 	public static class Search {
 		
         /// <summary>

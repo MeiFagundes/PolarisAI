@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PolarisCore.Skills
+namespace PolarisAICore.Skills
 {
 	public static class Debug{
 		public static void Execute(Dialog d) {
@@ -8,7 +8,7 @@ namespace PolarisCore.Skills
 			switch (d.Phrase[d.SkillsIndex[0] + 1]){
 
 				case "cognition":
-					d.Debug();
+					d.GetDebugInfo();
 					break;
 
 				case "vocabulary":

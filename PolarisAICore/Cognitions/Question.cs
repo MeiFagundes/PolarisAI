@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PolarisCore.Cognitions {
+namespace PolarisAICore.Cognitions {
 
 	public static class Question {
 		

@@ -1,4 +1,4 @@
-﻿namespace PolarisCore.Responses {
+﻿namespace PolarisAICore.Responses {
     public static class Question {
 
         public static void SetResponse(Dialog d) {

@@ -3,6 +3,9 @@
 1	i want to remember about my lessons later today
 1	remind me to do my homework
 1	add a reminder for tomorrow
+1	don't let me forget to do my homework
+1	i don't want to forget about my lessons
+1	i can't forget to take my medication tomorrow
 0	i didn't remember about my coding today
 0	i wish i cold remember the important things in my life
 0	i don't like the bad news recently

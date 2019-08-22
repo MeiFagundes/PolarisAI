@@ -1,11 +1,36 @@
 ﻿using PolarisAICore.Vocabulary;
 using System;
 using System.Threading.Tasks;
+using Starlight;
+using System.IO;
 
 namespace PolarisAICore {
-	public class Main {
-		public static String Cognize(String query, bool debugMode) {
-            
+	public class PolarisAICore {
+
+        static void Main(string[] args) {
+            Console.WriteLine(CognizeML("test"));
+        }
+
+        public static String CognizeML(String query) {
+
+            var stringWriter = new StringWriter();
+            Console.SetOut(stringWriter);
+            Console.SetError(stringWriter);
+
+            ClassificationController cc = new ClassificationController();
+
+            Console.WriteLine("Enter a phrase:");
+            cc.Cognize(query);
+
+            StreamWriter standardOutput = new StreamWriter(Console.OpenStandardOutput());
+            standardOutput.AutoFlush = true;
+            Console.SetOut(standardOutput);
+
+            return stringWriter.ToString();
+        }
+
+		public static String CognizeLegacy(String query, bool debugMode) {
+
 			VocabularyModel vocabulary = new VocabularyModel();
             Dialog dialog;
 

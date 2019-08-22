@@ -1,9 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>Library</OutputType>
+    <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp2.1</TargetFramework>
-    <StartupObject></StartupObject>
+    <StartupObject>PolarisAICore.PolarisAICore</StartupObject>
     <ApplicationIcon />
   </PropertyGroup>
 
@@ -27,6 +27,31 @@
     <Resource Include="Vocabulary\VocabularyResources\Punctuation_Marks.txt" />
     <Resource Include="Vocabulary\VocabularyResources\Skills.txt" />
     <Resource Include="Vocabulary\VocabularyResources\Verbs.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.ML" Version="1.3.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Starlight">
+      <HintPath>lib\Starlight.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Dataset\addReminder.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Dataset\showNews.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Dataset\showWeather.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Dataset\test.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

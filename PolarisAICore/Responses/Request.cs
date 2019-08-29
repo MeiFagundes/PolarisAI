@@ -2,7 +2,7 @@
 
 namespace PolarisAICore.Responses {
     public static class Request {
-        public static void SetResponse(Dialog d) {
+        public static void SetResponse(Utterance d) {
 
             if (!d.IsSkillsEmpty) {
                 if (d.IsRequestingUnimplementedSkill) {
@@ -19,7 +19,7 @@ namespace PolarisAICore.Responses {
             
         }
 
-        public static void SetGenericSuccessfulResponse(Dialog d) {
+        public static void SetGenericSuccessfulResponse(Utterance d) {
 
             d.Response = "Sure thing, i'm going to " + d.Phrase[d.SkillsIndex[0]] + " it for you.";
         }

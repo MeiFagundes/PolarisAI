@@ -1,7 +1,7 @@
 ﻿namespace PolarisAICore.Responses {
     public static class Question {
 
-        public static void SetResponse(Dialog d) {
+        public static void SetResponse(Utterance d) {
 
             if (d.Contains("can") && d.Contains("you") && d.GetPositionDifference("can", "you") == -1) {
 

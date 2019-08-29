@@ -7,7 +7,7 @@ namespace PolarisAICore.Skills {
         /// Searches something on Google in the Default browser.
         /// </summary>
         /// <param name="d"></param>
-		public static void Execute(Dialog d){
+		public static void Execute(Utterance d){
 
             if (d.Phrase[d.VerbsIndex[0] + 1] == "about")
                 d.Phrase.Remove("about");

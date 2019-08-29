@@ -8,7 +8,7 @@ namespace PolarisAICore.Cognitions {
 		/// Check if the Phrase is a Request
 		/// </summary>
 		/// <param name="d"></param>
-		public static void Cognize(Dialog d) {
+		public static void Cognize(Utterance d) {
 
             // There has to be a Verb to be a Request and it has to be up to the third word.
             if (!d.IsVerbsEmpty && d.VerbsIndex[0] < 3) {

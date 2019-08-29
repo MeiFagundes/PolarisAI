@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace PolarisAIServer.Controllers {
     [Route("[controller]")]
     [ApiController]
-    public class QueryStaticController : ControllerBase {
+    public class QueryController : ControllerBase {
         // GET query
         [HttpGet]
         public ActionResult<string> Get() {
@@ -17,7 +17,7 @@ namespace PolarisAIServer.Controllers {
         // GET query/do that
         [HttpGet("{query}")]
         public ActionResult<string> GetQuery(string query) {
-            return PolarisAICore.PolarisAICore.CognizeLegacy(query, true);
+            return PolarisAICore.PolarisAICore.Cognize(query, true);
         }
     }
 }

@@ -8,7 +8,19 @@ namespace PolarisAICore {
 	public class PolarisAICore {
 
         static void Main(string[] args) {
-            Console.WriteLine(CognizeML("test"));
+
+            Console.WriteLine(Cognize(Console.ReadLine(), true));
+        }
+
+        public static String Cognize(String query, bool debug = false){
+
+            if (debug) {
+                Console.WriteLine("Enter a phrase:");
+                Console.Write("> ");
+            }
+            String output = CognizeLegacy(query, debug);
+            output += CognizeML(query);
+            return output;
         }
 
         public static String CognizeML(String query) {
@@ -19,7 +31,7 @@ namespace PolarisAICore {
 
             ClassificationController cc = new ClassificationController();
 
-            Console.WriteLine("Enter a phrase:");
+            
             cc.Cognize(query);
 
             StreamWriter standardOutput = new StreamWriter(Console.OpenStandardOutput());
@@ -29,37 +41,20 @@ namespace PolarisAICore {
             return stringWriter.ToString();
         }
 
-		public static String CognizeLegacy(String query, bool debugMode) {
+		public static String CognizeLegacy(String query, bool debugMode = false) {
 
 			VocabularyModel vocabulary = new VocabularyModel();
-            Dialog dialog;
+            Utterance utterance = new Utterance(query, vocabulary);
 
-            if (debugMode) {
+            MainPipeline(utterance);
 
-                // Debug Mode
-                String debugInfo = "";
+            if (debugMode)
+                return utterance.GetDebugLog();
+            else
+                return utterance.ToJson();
+        }
 
-                debugInfo += "Input: '" + query + "'\n";
-                debugInfo += "\nHint! Try asking: 'Search about cute kittens please'\n";
-                dialog = new Dialog(query, vocabulary);
-
-                MainPipeline(dialog);
-                debugInfo += dialog.GetDebugInfo();
-                debugInfo += "Response (Alpha): " + dialog.Response + "\n";
-                debugInfo += "\n >";
-                return debugInfo;
-
-            }
-            else {
-                // Server Mode
-
-                dialog = new Dialog(query, vocabulary);
-                MainPipeline(dialog);
-                return dialog.ToJson();
-            }
-		}
-
-		public static void MainPipeline(Dialog dialog) {
+		public static void MainPipeline(Utterance dialog) {
 
             // Executing Cognition pipeline
 			Task cognitionCoreTask = new Task(() => Cognitions.CognitionsController.FetchCognition(dialog));

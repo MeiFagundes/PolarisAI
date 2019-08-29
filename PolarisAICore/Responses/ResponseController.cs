@@ -1,7 +1,7 @@
 ﻿namespace PolarisAICore.Responses {
     public static class ResponseController {
 
-        public static void GenerateResponse(Dialog d) {
+        public static void GenerateResponse(Utterance d) {
 
             if (d.IsRequest)
                 Responses.Request.SetResponse(d);

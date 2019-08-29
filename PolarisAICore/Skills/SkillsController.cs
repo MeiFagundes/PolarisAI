@@ -9,7 +9,7 @@ namespace PolarisAICore.Skills {
 		/// Fetches and executes the 'Execute' Method from the respective Class named after the Skill found in the Dialog object inside the 'Skills' Namespace
 		/// </summary>
 		/// <param name="d"></param>
-		public static void FetchSkill(Dialog d) {
+		public static void FetchSkill(Utterance d) {
 
 			String skillName = d.Phrase[d.SkillsIndex[0]];
 			skillName = skillName.First().ToString().ToUpper() + skillName.Substring(1);

@@ -8,7 +8,7 @@ namespace PolarisAICore.Cognitions {
 		/// Check if the Phrase is a question
 		/// </summary>
 		/// <param name="d"></param>
-		public static void Cognize(Dialog d) {
+		public static void Cognize(Utterance d) {
 			Byte? knowIndex;
 			Boolean isThereAKnow = false;
 

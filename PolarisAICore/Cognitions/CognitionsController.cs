@@ -9,7 +9,7 @@ namespace PolarisAICore.Cognitions {
 		/// Fetches and executes the 'Cognize' Methods from all the Classes inside the 'Cognition' Namespace
 		/// </summary>
 		/// <param name="dialog"></param>
-		public static void FetchCognition(Dialog dialog) {
+		public static void FetchCognition(Utterance dialog) {
 
 			Type[] classTypes = Utilities.Reflection.GetTypesInNamespace(Assembly.GetExecutingAssembly(), "PolarisAICore.Cognitions");
 			

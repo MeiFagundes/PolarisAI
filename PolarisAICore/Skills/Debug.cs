@@ -3,12 +3,12 @@
 namespace PolarisAICore.Skills
 {
 	public static class Debug{
-		public static void Execute(Dialog d) {
+		public static void Execute(Utterance d) {
 
 			switch (d.Phrase[d.SkillsIndex[0] + 1]){
 
 				case "cognition":
-					d.GetDebugInfo();
+					d.GetDebugLog();
 					break;
 
 				case "vocabulary":

@@ -7,6 +7,8 @@ using System.IO;
 namespace PolarisAICore {
 	public class PolarisAICore {
 
+        static ClassificationController classificationController = new ClassificationController();
+
         static void Main(string[] args) {
 
             Console.WriteLine(Cognize(Console.ReadLine(), true));
@@ -14,47 +16,40 @@ namespace PolarisAICore {
 
         public static String Cognize(String query, bool debug = false){
 
-            if (debug) {
-                Console.WriteLine("Enter a phrase:");
-                Console.Write("> ");
-            }
             String output = CognizeLegacy(query, debug);
             output += CognizeML(query);
             return output;
         }
 
-        public static String CognizeML(String query) {
+        public static String CognizeML(String query, bool debug = false) {
 
             StringWriter stringWriter = new StringWriter();
 
-            if (!debugMode) {
+            if (!debug) {
                 Console.SetOut(stringWriter);
                 Console.SetError(stringWriter);
             }
 
-            ClassificationController cc = new ClassificationController();
-
-            
-            cc.Cognize(query);
+            classificationController.Cognize(query);
 
             StreamWriter standardOutput = new StreamWriter(Console.OpenStandardOutput());
             standardOutput.AutoFlush = true;
             Console.SetOut(standardOutput);
 
-            var result = !debugMode ? stringWriter.ToString() : null;
+            var result = !debug ? stringWriter.ToString() : null;
             stringWriter.Close();
 
             return result;
         }
 
-		public static String CognizeLegacy(String query, bool debugMode = false) {
+		public static String CognizeLegacy(String query, bool debug = false) {
 
 			VocabularyModel vocabulary = new VocabularyModel();
             Utterance utterance = new Utterance(query, vocabulary);
 
             MainPipeline(utterance);
 
-            if (debugMode)
+            if (debug)
                 return utterance.GetDebugLog();
             else
                 return utterance.ToJson();

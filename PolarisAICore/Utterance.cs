@@ -151,10 +151,9 @@ namespace PolarisAICore {
             string debugInfo = "";
 
             debugInfo += "Input: '" + query + "'\n";
-            debugInfo += "\n =============== Utterance Debug =============== \n";
-            debugInfo += "\n ----- Static Cognition ----- \n\n";
-            debugInfo += "  Is this a Request?  : " + IsRequest + "\n";
-            debugInfo += "  Is this a Question? : " + IsQuestion + "\n\n";
+            debugInfo += "\n=============== PolarisAI Utterance Cognition ===============\n\n";
+            debugInfo += "Is this a Request?  : " + IsRequest + "\n";
+            debugInfo += "Is this a Question? : " + IsQuestion + "\n\n";
 
             List<String>[] phraseDebug = new List<String>[Phrase.Count];
 
@@ -187,9 +186,7 @@ namespace PolarisAICore {
             }
             debugInfo += "\n  JSON Output: " + ToJson() + "\n";
 
-            debugInfo += "Response: " + Response + "\n";
-
-            debugInfo += "\n -------------------------- \n\n";
+            debugInfo += "Response: " + Response + "\n\n";
 
             return debugInfo;
         }

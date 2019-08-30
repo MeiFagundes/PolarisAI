@@ -25,9 +25,12 @@ namespace PolarisAICore {
 
         public static String CognizeML(String query) {
 
-            var stringWriter = new StringWriter();
-            Console.SetOut(stringWriter);
-            Console.SetError(stringWriter);
+            StringWriter stringWriter = new StringWriter();
+
+            if (!debugMode) {
+                Console.SetOut(stringWriter);
+                Console.SetError(stringWriter);
+            }
 
             ClassificationController cc = new ClassificationController();
 
@@ -38,7 +41,10 @@ namespace PolarisAICore {
             standardOutput.AutoFlush = true;
             Console.SetOut(standardOutput);
 
-            return stringWriter.ToString();
+            var result = !debugMode ? stringWriter.ToString() : null;
+            stringWriter.Close();
+
+            return result;
         }
 
 		public static String CognizeLegacy(String query, bool debugMode = false) {

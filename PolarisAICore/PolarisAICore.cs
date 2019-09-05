@@ -1,13 +1,10 @@
 ﻿using PolarisAICore.Vocabulary;
 using System;
 using System.Threading.Tasks;
-using Starlight;
 using System.IO;
 
 namespace PolarisAICore {
 	public class PolarisAICore {
-
-        static ClassificationController classificationController = new ClassificationController();
 
         static void Main(string[] args) {
 
@@ -28,9 +25,10 @@ namespace PolarisAICore {
             if (!debug) {
                 Console.SetOut(stringWriter);
                 Console.SetError(stringWriter);
+                Console.WriteLine("=============== Starlight ML Cognition ===============\n");
             }
-
-            classificationController.Cognize(query);
+            
+            Console.WriteLine(CognitionSingleton.Instance.Cognize(query));
 
             StreamWriter standardOutput = new StreamWriter(Console.OpenStandardOutput());
             standardOutput.AutoFlush = true;

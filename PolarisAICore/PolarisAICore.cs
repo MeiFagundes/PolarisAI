@@ -25,7 +25,6 @@ namespace PolarisAICore {
             if (!debug) {
                 Console.SetOut(stringWriter);
                 Console.SetError(stringWriter);
-                Console.WriteLine("=============== Starlight ML Cognition ===============\n");
             }
             
             Console.WriteLine(CognitionSingleton.Instance.Cognize(query));

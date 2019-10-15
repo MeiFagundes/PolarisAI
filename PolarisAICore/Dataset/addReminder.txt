@@ -6,8 +6,12 @@
 1	don't let me forget to do my homework
 1	i don't want to forget about my lessons
 1	i can't forget to take my medication tomorrow
+1	add a reminder
+1	add an event
+1	add a refresher
+1	help me remember this
 0	i didn't remember about my coding today
-0	i wish i cold remember the important things in my life
+0	i wish i could remember the important things in my life
 0	i don't like the bad news recently
 0	Show weather
 0	Show climate
@@ -58,3 +62,23 @@
 0	Is it a beautiful day for a walk
 0	What’s the weather forecast
 0	i don't like the weather today
+0	what is going on today
+0	did anything happened recently
+0	I would like to know the recents events
+0	I would like to know the news
+0	show me new information
+0	news
+0	is there any bad thing happening
+0	it rained yesterday
+0	it was sunny yesterday
+0	it was cloudy yesterday
+0	I don't want to know the weather
+0	cats don't like rain
+0	is it raining
+0	weather forecast
+0	show me the forecast
+0	what is the forecast
+0	today's national weather forecast
+0	show forecast
+0	is the forecast good
+0	do I need an umbrella

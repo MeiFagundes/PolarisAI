@@ -44,7 +44,7 @@ namespace PolarisAICore.Vocabulary {
 			return temp;
 		}
 
-		public void Debug() {
+		public void PrintDebugLog() {
             Console.WriteLine("\n ------ Vocabulary Debug ------ \n");
             Console.WriteLine("  Nº of Verbs: " + Verbs.Count);
             Console.WriteLine("  Nº of Pronouns: " + Pronouns.Count);

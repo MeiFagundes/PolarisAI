@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
-    <StartupObject>PolarisAIServer.Program</StartupObject>
+    <StartupObject>PolarisAIServer.PolarisAIServer</StartupObject>
   </PropertyGroup>
 
   <ItemGroup>

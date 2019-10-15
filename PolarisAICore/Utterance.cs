@@ -8,7 +8,7 @@ namespace PolarisAICore {
 
 		// --- VARIABLES ---
 
-		public VocabularyModel vocabulary;
+		private VocabularyModel vocabulary;
 
         public string query;
         public List<String> Phrase { get; set; } = new List<String>();

@@ -23,7 +23,7 @@
 1	Is it hot today
 1	Is it going to be sweltering 
 1	Is it going to be warm 
-1	Is it going to be clear 
+1	Is it going to be clear
 1	Is it going to be misty 
 1	Is it going to be breezy
 1	Is it going to be showery
@@ -45,7 +45,7 @@
 1	How's it like outside
 1	Do you have rain
 1	Is it a beautiful day for a walk
-1	What’s the weather forecast
+1	Whatï¿½s the weather forecast
 1	is it raining
 1	weather forecast
 1	show me the forecast

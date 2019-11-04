@@ -12,7 +12,7 @@ namespace PolarisAICore.Skills
 					break;
 
 				case "vocabulary":
-					d.vocabulary.Debug();
+					d.Vocabulary.PrintDebugLog();
 					break;
 
 				default:

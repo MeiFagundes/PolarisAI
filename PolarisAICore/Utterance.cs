@@ -1,4 +1,5 @@
-﻿using PolarisAICore.Vocabulary;
+﻿using Newtonsoft.Json.Linq;
+using PolarisAICore.Vocabulary;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,7 @@ namespace PolarisAICore {
 
 		// --- VARIABLES ---
 
-		private VocabularyModel vocabulary;
+		public VocabularyModel Vocabulary { get; set; }
 
         public string query;
         public List<String> Phrase { get; set; } = new List<String>();
@@ -29,11 +30,8 @@ namespace PolarisAICore {
 		public Boolean IsQuestion { get; set; }
         public Boolean IsRequestingUnimplementedSkill { get; set; }
 
-        /// <summary>
-        /// Code:
-        /// 0: No action available
-        /// ...
-        /// </summary>
+        public IDictionary<String, float?> Intents { get; set; }
+
         public Int32 Code { get; set; } = 0;
         public String Response { get; set; }
         public String ResponseData { get; set; }
@@ -43,7 +41,7 @@ namespace PolarisAICore {
 
         public Utterance(String input, VocabularyModel vocabularyIn) {
 
-			this.vocabulary = vocabularyIn;
+			this.Vocabulary = vocabularyIn;
 
             query = input.ToLower();
 			Phrase = query.Split(' ').ToList();
@@ -52,7 +50,7 @@ namespace PolarisAICore {
 
             // Deleting all Punctuation Marks from the Phrase
             for (int i = 0; i < Phrase.Count; i++) {
-                foreach (String pontMark in vocabulary.PunctuationMarks) {
+                foreach (String pontMark in Vocabulary.PunctuationMarks) {
                     Phrase[i] = Phrase[i].Replace(pontMark, String.Empty);
                 }
             }
@@ -66,12 +64,12 @@ namespace PolarisAICore {
 				Phrase.Add(dot);
 			}*/
 			
-			IsSkillsEmpty = IndexInput(vocabulary.Skills, SkillsIndex);
-			IsVerbsEmpty = IndexInput(vocabulary.Verbs, VerbsIndex);
-			IsPronounsEmpty = IndexInput(vocabulary.Pronouns, PronounsIndex);
-			IsAdverbsEmpty = IndexInput(vocabulary.Adverbs, AdverbsIndex);
-			IsNounsEmpty = IndexInput(vocabulary.Nouns, NounsIndex);
-            IsIntWordsEmpty = IndexInput(vocabulary.IntWords, IntWordsIndex);
+			IsSkillsEmpty = IndexInput(Vocabulary.Skills, SkillsIndex);
+			IsVerbsEmpty = IndexInput(Vocabulary.Verbs, VerbsIndex);
+			IsPronounsEmpty = IndexInput(Vocabulary.Pronouns, PronounsIndex);
+			IsAdverbsEmpty = IndexInput(Vocabulary.Adverbs, AdverbsIndex);
+			IsNounsEmpty = IndexInput(Vocabulary.Nouns, NounsIndex);
+            IsIntWordsEmpty = IndexInput(Vocabulary.IntWords, IntWordsIndex);
 
         }
 		public Utterance() { }
@@ -137,13 +135,29 @@ namespace PolarisAICore {
             return GetPositionDifference(firstWord, secondWord) > 0;
         }
 
-        public String ToJson() {
+        public void SetMLResponse(JObject json) {
 
-            return "{" +
-                "\"Code\":" + Code + "," +
-                "\"Response\":" + (Response == String.Empty || Response == null ? "null" : "\"" + Response + "\"") + "," +
-                "\"ResponseData\":" + (ResponseData == String.Empty || ResponseData == null ? "null" : "\"" + ResponseData + "\"") +
-                "}";
+            Intents = new Dictionary<String, float?>();
+
+            for (int i = 0; i < json["intents"].Count(); i++) {
+                Intents.Add(json["intents"][i]["intent"].ToString(), float.Parse(json["intents"][i]["score"].ToString()));
+            }
+
+            if (Intents.Any())
+                // Temp
+                Response = $"Top Scoring Intent: {Intents.First().Key} | Score: {Intents.First().Value}";
+        }
+
+        public JObject GetResponse() {
+
+            JObject reponse =
+                new JObject(
+                    new JProperty("code", Code),
+                    new JProperty("response", Response == String.Empty ? null : Response),
+                    new JProperty("responseData", ResponseData == String.Empty ? null : ResponseData)
+                );
+
+            return reponse;
         }
 
 		public string GetDebugLog() {
@@ -184,7 +198,7 @@ namespace PolarisAICore {
                 }
                 debugInfo += "\n";
             }
-            debugInfo += "\n  JSON Output: " + ToJson() + "\n";
+            debugInfo += "\n  JSON Output: " + GetResponse() + "\n";
 
             debugInfo += "Response: " + Response + "\n\n";
 

@@ -2,57 +2,48 @@
 using System;
 using System.Threading.Tasks;
 using System.IO;
+using Newtonsoft.Json.Linq;
 
 namespace PolarisAICore {
 	public class PolarisAICore {
 
         static void Main(string[] args) {
 
-            Console.WriteLine(Cognize(Console.ReadLine(), true));
+            Console.WriteLine(Cognize(Console.ReadLine()).ToString());
         }
 
-        public static String Cognize(String query, bool debug = false){
+        public static JObject Cognize(String query){
 
-            String output = CognizeLegacy(query, debug);
-            output += CognizeML(query);
+            //String output = CognizeLegacy(query);
+            VocabularyModel vocabulary = new VocabularyModel();
+            Utterance utterance = new Utterance(query, vocabulary);
+            utterance.SetMLResponse(CognizeML(query));
+            return utterance.GetResponse();
+        }
+
+        public static String CognizeDebug(String query) {
+
+            String output = CognizeLegacy(query);
+            output += CognizeML(query, true).ToString();
             return output;
         }
 
-        public static String CognizeML(String query, bool debug = false) {
+        private static JObject CognizeML(String query, bool debug = false) {
 
-            StringWriter stringWriter = new StringWriter();
-
-            if (!debug) {
-                Console.SetOut(stringWriter);
-                Console.SetError(stringWriter);
-            }
-            
-            Console.WriteLine(CognitionSingleton.Instance.Cognize(query));
-
-            StreamWriter standardOutput = new StreamWriter(Console.OpenStandardOutput());
-            standardOutput.AutoFlush = true;
-            Console.SetOut(standardOutput);
-
-            var result = !debug ? stringWriter.ToString() : null;
-            stringWriter.Close();
-
-            return result;
+            return CognitionSingleton.Instance.Cognize(query);
         }
 
-		public static String CognizeLegacy(String query, bool debug = false) {
+		private static String CognizeLegacy(String query) {
 
 			VocabularyModel vocabulary = new VocabularyModel();
             Utterance utterance = new Utterance(query, vocabulary);
 
             MainPipeline(utterance);
 
-            if (debug)
-                return utterance.GetDebugLog();
-            else
-                return utterance.ToJson();
+            return utterance.GetDebugLog();
         }
 
-		public static void MainPipeline(Utterance dialog) {
+		private static void MainPipeline(Utterance dialog) {
 
             // Executing Cognition pipeline
 			Task cognitionCoreTask = new Task(() => Cognitions.CognitionsController.FetchCognition(dialog));

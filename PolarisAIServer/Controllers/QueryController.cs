@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json.Linq;
 
 namespace PolarisAIServer.Controllers {
     [Route("[controller]")]
@@ -13,8 +14,8 @@ namespace PolarisAIServer.Controllers {
 
         // GET query/do that
         [HttpGet("{query}")]
-        public ActionResult<string> GetQuery(string query) {
-            return PolarisAICore.PolarisAICore.Cognize(query, true);
+        public ActionResult<JObject> GetQuery(string query) {
+            return PolarisAICore.PolarisAICore.Cognize(query);
         }
     }
 }

@@ -145,7 +145,7 @@ namespace PolarisAICore {
 
             if (Intents.Any())
                 // Temp
-                Response = $"Top Scoring Intent: {Intents.First().Key} | Score: {Intents.First().Value}";
+                Response = $"The top scoring Intent for this request is {Intents.First().Key}, with a score of {((float) Intents.First().Value * 100).ToString("n1")}%";
         }
 
         public JObject GetResponse() {

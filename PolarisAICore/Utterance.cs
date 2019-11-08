@@ -7,44 +7,65 @@ using System.Linq;
 namespace PolarisAICore {
 	public class Utterance {
 
-		// --- VARIABLES ---
+		// --- Attributes ---
 
-		public VocabularyModel Vocabulary { get; set; }
 
-        public string query;
-        public List<String> Phrase { get; set; } = new List<String>();
-		public List<Byte> VerbsIndex { get; set; } = new List<Byte>();
-		public List<Byte> PronounsIndex { get; set; } = new List<Byte>();
-		public List<Byte> AdverbsIndex { get; set; } = new List<Byte>();
-		public List<Byte> SkillsIndex { get; set; } = new List<Byte>();
-		public List<Byte> NounsIndex { get; set; } = new List<Byte>();
-        public List<Byte> IntWordsIndex { get; set; } = new List<Byte>();
-
-        public Boolean IsVerbsEmpty { get; set; }
-		public Boolean IsPronounsEmpty { get; set; }
-		public Boolean IsAdverbsEmpty { get; set; }
-		public Boolean IsSkillsEmpty { get; set; }
-		public Boolean IsNounsEmpty { get; set; }
-        public Boolean IsIntWordsEmpty { get; set; }
-        public Boolean IsRequest { get; set; }
-		public Boolean IsQuestion { get; set; }
-        public Boolean IsRequestingUnimplementedSkill { get; set; }
+        public string Query;
 
         public IDictionary<String, float?> Intents { get; set; }
-
         public Int32 Code { get; set; } = 0;
         public String Response { get; set; }
         public String ResponseData { get; set; }
 
+        private readonly JObject _nlpResponse;
 
-        // --- CONSTRUCTORS ---
+        // Legacy
 
-        public Utterance(String input, VocabularyModel vocabularyIn) {
+        public VocabularyModel Vocabulary { get; set; }
+        public List<String> Phrase { get; set; } = new List<String>();
+        public List<Byte> VerbsIndex { get; set; } = new List<Byte>();
+        public List<Byte> PronounsIndex { get; set; } = new List<Byte>();
+        public List<Byte> AdverbsIndex { get; set; } = new List<Byte>();
+        public List<Byte> SkillsIndex { get; set; } = new List<Byte>();
+        public List<Byte> NounsIndex { get; set; } = new List<Byte>();
+        public List<Byte> IntWordsIndex { get; set; } = new List<Byte>();
 
-			this.Vocabulary = vocabularyIn;
+        public Boolean IsVerbsEmpty { get; set; }
+        public Boolean IsPronounsEmpty { get; set; }
+        public Boolean IsAdverbsEmpty { get; set; }
+        public Boolean IsSkillsEmpty { get; set; }
+        public Boolean IsNounsEmpty { get; set; }
+        public Boolean IsIntWordsEmpty { get; set; }
+        public Boolean IsRequest { get; set; }
+        public Boolean IsQuestion { get; set; }
+        public Boolean IsRequestingUnimplementedSkill { get; set; }
 
-            query = input.ToLower();
-			Phrase = query.Split(' ').ToList();
+
+        // --- Constructors ---
+
+        public Utterance(JObject NLPResponse) {
+
+            _nlpResponse = NLPResponse;
+
+            Query = _nlpResponse["query"].ToString();
+
+            // Set intents
+            Intents = new Dictionary<String, float?>();
+
+            for (int i = 0; i < _nlpResponse["intents"].Count(); i++) {
+                Intents.Add(_nlpResponse["intents"][i]["intent"].ToString(), float.Parse(_nlpResponse["intents"][i]["score"].ToString()));
+            }
+
+            // Set entity
+            if (Intents.Any()) {
+                ResponseData = _nlpResponse["entities"]["entity"].ToString();
+            }
+        }
+
+        public Utterance(String input) {
+
+            Query = input.ToLower();
+			Phrase = Query.Split(' ').ToList();
 			Phrase.RemoveAll(String.IsNullOrEmpty);
 
 
@@ -55,14 +76,6 @@ namespace PolarisAICore {
                 }
             }
             Phrase.RemoveAll(t => t == String.Empty);
-
-            // Isolating ponctuation mark as a last String
-			/*String lastString = Phrase[Phrase.Count - 1].Substring(Phrase[Phrase.Count - 1].Length - 1);
-			if (lastString.Substring(lastString.Length - 1) == "?" || lastString.Substring(lastString.Length - 1) == "." || lastString.Substring(lastString.Length - 1) == "!") {
-				String dot = lastString.Substring(lastString.Length - 1);
-				Phrase[Phrase.Count - 1].Remove(Phrase[Phrase.Count - 1].Length - 1);
-				Phrase.Add(dot);
-			}*/
 			
 			IsSkillsEmpty = IndexInput(Vocabulary.Skills, SkillsIndex);
 			IsVerbsEmpty = IndexInput(Vocabulary.Verbs, VerbsIndex);
@@ -72,9 +85,8 @@ namespace PolarisAICore {
             IsIntWordsEmpty = IndexInput(Vocabulary.IntWords, IntWordsIndex);
 
         }
-		public Utterance() { }
 
-        // --- METHODS ---
+        // --- Methods ---
 
         /// <summary>
         /// Stores Vocabulary elements, their indexes and first-of-type pointers
@@ -135,19 +147,6 @@ namespace PolarisAICore {
             return GetPositionDifference(firstWord, secondWord) > 0;
         }
 
-        public void SetMLResponse(JObject json) {
-
-            Intents = new Dictionary<String, float?>();
-
-            for (int i = 0; i < json["intents"].Count(); i++) {
-                Intents.Add(json["intents"][i]["intent"].ToString(), float.Parse(json["intents"][i]["score"].ToString()));
-            }
-
-            if (Intents.Any())
-                // Temp
-                Response = $"The top scoring Intent for this request is {Intents.First().Key}, with a score of {((float) Intents.First().Value * 100).ToString("n1")}%";
-        }
-
         public JObject GetResponse() {
 
             JObject reponse =
@@ -164,8 +163,20 @@ namespace PolarisAICore {
 
             string debugInfo = "";
 
-            debugInfo += "Input: '" + query + "'\n";
-            debugInfo += "\n=============== PolarisAI Utterance Cognition ===============\n\n";
+            debugInfo += "\nQuery: '" + Query + "'\n";
+            debugInfo += $"\nStarlight Response:\n{_nlpResponse.ToString()}\n";
+            debugInfo += $"\nPolarisAI Response:\n{GetResponse()}\n";
+
+            return debugInfo;
+        }
+
+
+        public string GetDebugLogLegacy() {
+
+            string debugInfo = "";
+
+            debugInfo += "Query: '" + Query + "'\n";
+
             debugInfo += "Is this a Request?  : " + IsRequest + "\n";
             debugInfo += "Is this a Question? : " + IsQuestion + "\n\n";
 
@@ -198,9 +209,6 @@ namespace PolarisAICore {
                 }
                 debugInfo += "\n";
             }
-            debugInfo += "\n  JSON Output: " + GetResponse() + "\n";
-
-            debugInfo += "Response: " + Response + "\n\n";
 
             return debugInfo;
         }

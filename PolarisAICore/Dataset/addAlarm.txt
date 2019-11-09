@@ -13,14 +13,6 @@
 1	Set a periodic alarm for 8 p.m.
 1	Add an everyday alarm for 8 p.m.
 1	Wake me up at 10 a.m. everyday
-1	
-1
-1
-1
-1
-1
-1
-1
 0	Show weather
 0	Show climate
 0	Show temperature

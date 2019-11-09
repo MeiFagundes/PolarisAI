@@ -12,10 +12,10 @@ namespace PolarisAICore {
 
         public string Query;
 
-        public IDictionary<String, float?> Intents { get; set; }
+        public List<Intent> Intents { get; set; }
         public Int32 Code { get; set; } = 0;
         public String Response { get; set; }
-        public String ResponseData { get; set; }
+        public JObject Entity { get; set; }
 
         private readonly JObject _nlpResponse;
 
@@ -50,18 +50,19 @@ namespace PolarisAICore {
             Query = _nlpResponse["query"].ToString();
 
             // Set intents
-            Intents = new Dictionary<String, float?>();
+            Intents = new List<Intent>();
 
             for (int i = 0; i < _nlpResponse["intents"].Count(); i++) {
-                Intents.Add(_nlpResponse["intents"][i]["intent"].ToString(), float.Parse(_nlpResponse["intents"][i]["score"].ToString()));
+                Intents.Add(new Intent(_nlpResponse["intents"][i]["intent"].ToString(), float.Parse(_nlpResponse["intents"][i]["score"].ToString())));
             }
 
             // Set entity
             if (Intents.Any()) {
-                ResponseData = _nlpResponse["entities"]["entity"].ToString();
+                Entity = (JObject) _nlpResponse["entities"];
             }
         }
 
+        [Obsolete("Static cognition is obsolete, please use Utterance(JObject NLPResponse) instead")]
         public Utterance(String input) {
 
             Query = input.ToLower();
@@ -147,19 +148,80 @@ namespace PolarisAICore {
             return GetPositionDifference(firstWord, secondWord) > 0;
         }
 
+        private Intent GetTopScoringIntent() {
+
+            Intent topScoringIntent = new Intent();
+            float maxValue = 0;
+
+            foreach (Intent intent in Intents) {
+                if (intent.Score > maxValue) {
+                    topScoringIntent = intent;
+                    maxValue = intent.Score;
+                }
+            }
+
+            return topScoringIntent;
+        }
+
         public JObject GetResponse() {
 
             JObject reponse =
                 new JObject(
-                    new JProperty("code", Code),
+                    new JProperty("code", GetResponseCode()),
                     new JProperty("response", Response == String.Empty ? null : Response),
-                    new JProperty("responseData", ResponseData == String.Empty ? null : ResponseData)
+                    new JProperty("entity", Entity)
                 );
 
             return reponse;
         }
 
-		public string GetDebugLog() {
+        Int16 GetResponseCode() {
+
+            switch (GetTopScoringIntent().Name) {
+
+                case "none":
+                    return 11;
+
+                case "justTalk":
+                    return 2;
+
+                case "addAlarm":
+
+                    if (Entity == null || Entity["date"] == null || Entity["time"] == null)
+                        return 42;
+                    else
+                        return 41;
+
+                case "addReminder":
+                    if (Entity == null || Entity["date"] == null || Entity["time"] == null)
+                        return 42;
+                    else
+                        return 41;
+
+                case "showNews":
+                    return 61;
+
+                case "showWeather":
+                    return 51;
+
+                case "makeCall":
+                    if (Entity == null || Entity["date"] == null || Entity["time"] == null)
+                        return 72;
+                    else
+                        return 71;
+
+                case "playMusic":
+                    if (Entity == null || Entity["date"] == null || Entity["time"] == null)
+                        return 82;
+                    else
+                        return 81;
+
+                default:
+                    return 0;
+            }
+        }
+
+        public string GetDebugLog() {
 
             string debugInfo = "";
 
@@ -170,7 +232,7 @@ namespace PolarisAICore {
             return debugInfo;
         }
 
-
+        [Obsolete("Static cognition is obsolete, please use GetDebugLog() instead")]
         public string GetDebugLogLegacy() {
 
             string debugInfo = "";

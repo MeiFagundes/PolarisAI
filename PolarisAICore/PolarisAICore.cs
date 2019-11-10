@@ -29,7 +29,7 @@ namespace PolarisAICore {
 
         private static JObject CognizeNLP(String query) {
 
-            return CognitionSingleton.Instance.Cognize(query);
+            return IntentClassificatorSingleton.Instance.Cognize(query);
         }
 
 		private static String CognizeLegacy(Utterance utterance) {

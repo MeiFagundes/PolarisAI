@@ -169,7 +169,7 @@ namespace PolarisAICore {
                 new JObject(
                     new JProperty("code", GetResponseCode()),
                     new JProperty("response", Response == String.Empty ? null : Response),
-                    new JProperty("entity", Entity)
+                    new JProperty("entities", Entity)
                 );
 
             return reponse;

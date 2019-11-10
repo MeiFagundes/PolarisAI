@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json.Linq;
+using PolarisAICore.Response;
 using PolarisAICore.Vocabulary;
 using System;
 using System.Collections.Generic;
@@ -18,6 +19,11 @@ namespace PolarisAICore {
         public JObject Entity { get; set; }
 
         private readonly JObject _nlpResponse;
+        public Intent TopScoringIntent {
+            get {
+                return GetTopScoringIntent();
+            }
+        }
 
         // Legacy
 

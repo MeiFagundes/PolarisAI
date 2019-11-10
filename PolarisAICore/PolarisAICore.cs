@@ -9,13 +9,16 @@ namespace PolarisAICore {
 
         static void Main() {
 
-            Console.WriteLine("Enter a test query:");
-            Console.WriteLine(CognizeDebug(Console.ReadLine()));
+            while (true) {
+                Console.WriteLine("Enter a test query:");
+                Console.WriteLine(CognizeDebug(Console.ReadLine()));
+            }
         }
 
         public static JObject Cognize(String query){
 
             Utterance utterance = new Utterance(CognizeNLP(query));
+            utterance.Response = Response.ResponseController.SetResponse(utterance);
 
             return utterance.GetResponse();
         }
@@ -23,6 +26,7 @@ namespace PolarisAICore {
         public static String CognizeDebug(String query) {
 
             Utterance utterance = new Utterance(CognizeNLP(query));
+            utterance.Response = Response.ResponseController.SetResponse(utterance);
 
             return utterance.GetDebugLog();
         }
@@ -48,7 +52,7 @@ namespace PolarisAICore {
             }
 
             // Generating a response
-            Task responseCoreTask = new Task(() => Responses.ResponseController.GenerateResponse(utterance));
+            Task responseCoreTask = new Task(() => Response.ResponseController.SetResponseLegacy(utterance));
             responseCoreTask.RunSynchronously();
 
             return utterance.GetDebugLog();

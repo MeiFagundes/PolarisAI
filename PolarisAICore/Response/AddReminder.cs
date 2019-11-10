@@ -9,10 +9,10 @@ namespace PolarisAICore.Response {
 
         static readonly String[] _responses = 
         {
-            "Of course, I will remind you to.",
-            "Sure, i will remind you to.",
-            "Got it! I will remind you to.",
-            "You don't have to ask again! I will remind you to.",
+            "Of course, I will remind you to",
+            "Sure, i will remind you to",
+            "Got it! I will remind you to",
+            "You don't have to ask again! I will remind you to",
         };
 
         static readonly String[] _noEntityResponses =
@@ -26,7 +26,7 @@ namespace PolarisAICore.Response {
         public static String SetResponse(Utterance u) {
 
             if (u.Entity["entity"] != null)
-                return $"{_responses[_random.Next(_responses.Length)]} {u.Entity["entity"]}";
+                return $"{_responses[_random.Next(_responses.Length)]} {u.Entity["entity"]}.";
             else
                 return _noEntityResponses[_random.Next(_noEntityResponses.Length)];
         }

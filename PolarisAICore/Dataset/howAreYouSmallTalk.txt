@@ -4,6 +4,9 @@
 1	Howdy
 1	What's up	
 1	What's going on
+0	Where are you
+0	What are you
+0	Who are you
 0	Show weather
 0	Show climate
 0	Show temperature
@@ -51,7 +54,7 @@
 0	How's it like outside
 0	Do you have rain
 0	Is it a beautiful day for a walk
-0	What�s the weather forecast
+0	What's the weather forecast
 0	is it raining
 0	weather forecast
 0	show me the forecast

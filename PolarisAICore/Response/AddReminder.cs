@@ -23,7 +23,7 @@ namespace PolarisAICore.Response {
 
         public static String SetResponse(Utterance u) {
 
-            if (u.Entity["entity"] != null)
+            if (u.Entity["entity"] != null && u.Entity["entity"].ToString() != String.Empty)
                 return $"{_responses[_random.Next(_responses.Length)]} {u.Entity["entity"]}.";
             else
                 return _noEntityResponses[_random.Next(_noEntityResponses.Length)];

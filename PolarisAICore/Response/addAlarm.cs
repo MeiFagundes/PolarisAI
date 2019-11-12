@@ -25,8 +25,8 @@ namespace PolarisAICore.Response {
 
         public static String SetResponse(Utterance u) {
 
-            if (u.Entity["time"] != null)
-                if (u.Entity["entity"] != null)
+            if (u.Entity["time"] != null && u.Entity["time"].ToString() != String.Empty)
+                if (u.Entity["entity"] != null && u.Entity["time"].ToString() != String.Empty)
                     return $"{_responses[_random.Next(_responses.Length)]} {u.Entity["entity"]}, {u.Entity["time"]}.";
                 else
                     return $"{_responses[_random.Next(_responses.Length)]} {u.Entity["time"]}.";

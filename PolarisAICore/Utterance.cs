@@ -188,7 +188,11 @@ namespace PolarisAICore {
                 case "none":
                     return 11;
 
-                case "justTalk":
+                case "howAreYouSmallTalk":
+                case "otherAssistantSmallTalk":
+                case "whatDoYouDoSmallTalk":
+                case "whatsYourNameSmallTalk":
+                case "whoAreYouSmallTalk":
                     return 2;
 
                 case "addAlarm":

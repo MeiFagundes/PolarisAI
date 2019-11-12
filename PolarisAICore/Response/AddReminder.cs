@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using System;
 
 namespace PolarisAICore.Response {
     class AddReminder {
@@ -23,7 +24,7 @@ namespace PolarisAICore.Response {
 
         public static String SetResponse(Utterance u) {
 
-            if (u.Entity["entity"] != null && u.Entity["entity"].ToString() != String.Empty)
+            if (u.Entity["entity"].Type != JTokenType.Null)
                 return $"{_responses[_random.Next(_responses.Length)]} {u.Entity["entity"]}.";
             else
                 return _noEntityResponses[_random.Next(_noEntityResponses.Length)];

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -25,8 +26,8 @@ namespace PolarisAICore.Response {
 
         public static String SetResponse(Utterance u) {
 
-            if (u.Entity["time"] != null && u.Entity["time"].ToString() != String.Empty)
-                if (u.Entity["entity"] != null && u.Entity["time"].ToString() != String.Empty)
+            if (u.Entity["time"].Type != JTokenType.Null)
+                if (u.Entity["entity"].Type != JTokenType.Null)
                     return $"{_responses[_random.Next(_responses.Length)]} {u.Entity["entity"]}, {u.Entity["time"]}.";
                 else
                     return $"{_responses[_random.Next(_responses.Length)]} {u.Entity["time"]}.";

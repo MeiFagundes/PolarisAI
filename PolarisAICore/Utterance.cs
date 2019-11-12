@@ -197,16 +197,16 @@ namespace PolarisAICore {
 
                 case "addAlarm":
 
-                    if (Entity == null || Entity["date"] == null || Entity["time"] == null)
-                        return 42;
-                    else
+                    if (Entity.HasValues || Entity["date"].Type != JTokenType.Null || Entity["time"].Type != JTokenType.Null)
                         return 41;
+                    else
+                        return 42;
 
                 case "addReminder":
-                    if (Entity == null || Entity["date"] == null || Entity["time"] == null)
-                        return 42;
+                    if (Entity.HasValues || Entity["date"].Type != JTokenType.Null || Entity["time"].Type != JTokenType.Null)
+                        return 31;
                     else
-                        return 41;
+                        return 32;
 
                 case "showNews":
                     return 61;
@@ -215,16 +215,17 @@ namespace PolarisAICore {
                     return 51;
 
                 case "makeCall":
-                    if (Entity == null || Entity["date"] == null || Entity["time"] == null)
-                        return 72;
-                    else
+                    if (Entity.HasValues || Entity["date"].Type != JTokenType.Null || Entity["time"].Type != JTokenType.Null)
                         return 71;
-
-                case "playMusic":
-                    if (Entity == null || Entity["date"] == null || Entity["time"] == null)
-                        return 82;
                     else
+                        return 72;
+
+                case "playSong":
+
+                    if (Entity.HasValues || Entity["date"].Type != JTokenType.Null || Entity["time"].Type != JTokenType.Null)
                         return 81;
+                    else
+                        return 82;
 
                 default:
                     return 0;

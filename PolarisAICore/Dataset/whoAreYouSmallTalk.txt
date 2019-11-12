@@ -1,5 +1,14 @@
 1	Who are you
 1	Who the hell are you
+1	Who are you
+1	Are you a star?
+1	Are you a personal assistant
+1	Are you female
+1	Do i know you from somewhere?
+1	Who r you
+1	Do i know u
+1	Who are u
+1	Do i know you?
 0	Where are you
 0	What's your name
 0	What do they call you
@@ -12,7 +21,7 @@
 0	How you doing
 0	Hey there
 0	Howdy
-0	What's up	
+0	What's up
 0	What's going on
 0	Show weather
 0	Show climate
@@ -616,12 +625,12 @@
 0	I don't want to forget to change the fish tank
 0	I don't want to forget to grab the books
 0	I don't want to forget to clean the bathroom
-0	Call emergency 
+0	Call emergency
 0	Call the police
 0	Call firemen
 0	Call João
 0	I want to talk to João
-0	Phone João	 
+0	Phone João
 0	Make a phone call to João
 0	Call the cops
 0	Make a phone call to the police
@@ -630,4 +639,3 @@
 0	Call the fire department
 0	Let me talk to João
 0	Call João's number
-

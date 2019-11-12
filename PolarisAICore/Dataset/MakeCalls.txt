@@ -3,7 +3,7 @@
 1	Call firemen
 1	Call João
 1	I want to talk to João
-1	Phone João	 
+1	Phone João
 1	Make a phone call to João
 1	Call the cops
 1	Make a phone call to the police
@@ -614,4 +614,3 @@
 0	I don't want to forget to change the fish tank
 0	I don't want to forget to grab the books
 0	I don't want to forget to clean the bathroom
-

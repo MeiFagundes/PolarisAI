@@ -2,7 +2,7 @@
 1	How you doing
 1	Hey there
 1	Howdy
-1	What's up	
+1	What's up
 1	What's going on
 0	Where are you
 0	What are you

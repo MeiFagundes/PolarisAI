@@ -1,4 +1,6 @@
-# Polaris AI
+# 
+![Logo](C:\Users\Mei\OneDrive\Code\Git\PolarisAI\Logo.png)
+
 A Personal Assistant Engine built with .NET Core with Natural Language Processing.
 The NLP capabilities are powered by the **Starlight Core** (https://github.com/MeiFagundes/Starlight).
 

@@ -11,14 +11,9 @@ namespace PolarisAICore.Response {
             "Of course! Here's today's news:",
             "Sure! This is what is happening today:",
             "Alright! Here's today's news:",
-            "You don't have to ask again! This is what is happening today:"
-            "Got it! Here it is:",
-            "Right! Here are the news:",
-            "These are the news:",
+            "You don't have to ask again! This is what is happening today:",
+            "Right! Here are the news from today:",
             "Sure thing! This is the latest news:",
-            "I will play the news:",
-            "Here is an update:",
-            "Let's see:"
         };
 
         public static String SetResponse(Utterance u) {

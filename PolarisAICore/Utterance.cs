@@ -1,5 +1,4 @@
 ﻿using Newtonsoft.Json.Linq;
-using PolarisAICore.Response;
 using PolarisAICore.Vocabulary;
 using System;
 using System.Collections.Generic;
@@ -200,6 +199,7 @@ namespace PolarisAICore {
                     case "whatDoYouDoSmallTalk":
                     case "whatsYourNameSmallTalk":
                     case "whoAreYouSmallTalk":
+                    case "tellJoke":
                         return 2;
 
                     case "addAlarm":

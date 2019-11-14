@@ -14,7 +14,11 @@ namespace PolarisAICore {
         public string Query;
 
         public List<Intent> Intents { get; set; }
-        public Int32 Code { get; set; } = 0;
+        public Int32 Code {
+            get {
+                return GetResponseCode();
+            }
+        }
         public String Response { get; set; }
         public JObject Entity { get; set; }
 
@@ -173,7 +177,7 @@ namespace PolarisAICore {
 
             JObject reponse =
                 new JObject(
-                    new JProperty("code", GetResponseCode()),
+                    new JProperty("code", Code),
                     new JProperty("response", Response == String.Empty ? null : Response),
                     new JProperty("entities", Entity)
                 );
@@ -183,53 +187,59 @@ namespace PolarisAICore {
 
         Int16 GetResponseCode() {
 
-            switch (GetTopScoringIntent().Name) {
+            Intent topScoring = GetTopScoringIntent();
 
-                case "none":
-                    return 11;
+            if (topScoring.Score > 0.8) {
+                switch (topScoring.Name) {
 
-                case "howAreYouSmallTalk":
-                case "otherAssistantSmallTalk":
-                case "whatDoYouDoSmallTalk":
-                case "whatsYourNameSmallTalk":
-                case "whoAreYouSmallTalk":
-                    return 2;
+                    case "none":
+                        return 11;
 
-                case "addAlarm":
+                    case "howAreYouSmallTalk":
+                    case "otherAssistantSmallTalk":
+                    case "whatDoYouDoSmallTalk":
+                    case "whatsYourNameSmallTalk":
+                    case "whoAreYouSmallTalk":
+                        return 2;
 
-                    if (Entity.HasValues || Entity["date"].Type != JTokenType.Null || Entity["time"].Type != JTokenType.Null)
-                        return 41;
-                    else
-                        return 42;
+                    case "addAlarm":
 
-                case "addReminder":
-                    if (Entity.HasValues || Entity["date"].Type != JTokenType.Null || Entity["time"].Type != JTokenType.Null)
-                        return 31;
-                    else
-                        return 32;
+                        if (Entity.HasValues || Entity["date"].Type != JTokenType.Null || Entity["time"].Type != JTokenType.Null)
+                            return 41;
+                        else
+                            return 42;
 
-                case "showNews":
-                    return 61;
+                    case "addReminder":
+                        if (Entity.HasValues || Entity["date"].Type != JTokenType.Null || Entity["time"].Type != JTokenType.Null)
+                            return 31;
+                        else
+                            return 32;
 
-                case "showWeather":
-                    return 51;
+                    case "showNews":
+                        return 61;
 
-                case "makeCall":
-                    if (Entity.HasValues || Entity["date"].Type != JTokenType.Null || Entity["time"].Type != JTokenType.Null)
-                        return 71;
-                    else
-                        return 72;
+                    case "showWeather":
+                        return 51;
 
-                case "playSong":
+                    case "makeCall":
+                        if (Entity.HasValues || Entity["date"].Type != JTokenType.Null || Entity["time"].Type != JTokenType.Null)
+                            return 71;
+                        else
+                            return 72;
 
-                    if (Entity.HasValues || Entity["date"].Type != JTokenType.Null || Entity["time"].Type != JTokenType.Null)
-                        return 81;
-                    else
-                        return 82;
+                    case "playSong":
 
-                default:
-                    return 0;
+                        if (Entity.HasValues || Entity["date"].Type != JTokenType.Null || Entity["time"].Type != JTokenType.Null)
+                            return 81;
+                        else
+                            return 82;
+
+                    default:
+                        return 11;
+                }
             }
+            else
+                return 0;
         }
 
         public string GetDebugLog() {

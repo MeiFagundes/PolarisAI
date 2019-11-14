@@ -4,11 +4,11 @@ using System.Data.SqlClient;
 using System.Globalization;
 
 namespace PolarisAICore {
-    public class PolarisAIDataBase {
+    public class PolarisAIDatabaseConnection {
 
         readonly SqlConnection _connection;
 
-        public PolarisAIDataBase(string host, string database, string id, string password) {
+        public PolarisAIDatabaseConnection(string host, string database, string id, string password) {
 
             _connection = new SqlConnection($"Data Source={host};Initial Catalog={database};User ID={id};Password={password};Connect Timeout=15;");
         }

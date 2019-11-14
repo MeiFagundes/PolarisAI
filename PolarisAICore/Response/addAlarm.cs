@@ -13,6 +13,11 @@ namespace PolarisAICore.Response {
             "Of course, I've set an alarm for",
             "Sure, I've set an alarm for",
             "Got it! I've set an alarm for",
+            "Done, I've set an alarm for",
+            "The alarm is set for",
+            "Sure thing, your alarm is set for",
+            "Here it is, the alarm will go off at",
+            "Got it, your alarm's set for",
             "You don't have to ask again! I've set an alarm for",
         };
 
@@ -21,7 +26,10 @@ namespace PolarisAICore.Response {
             "Of course, what time do you want your alarm to be set to?",
             "Sure, do you want me to set your alarm for what time?",
             "Alright, what time do you want your alarm to be set to?",
-            "You don't have to ask again! Do you want me to set your alarm to what time?"
+            "You don't have to ask again! Do you want me to set your alarm to what time?",
+            "Alright, for when?",
+            "Sorry, what time was that?",
+            "Of course, when is the alarm for?"
         };
 
         public static String SetResponse(Utterance u) {

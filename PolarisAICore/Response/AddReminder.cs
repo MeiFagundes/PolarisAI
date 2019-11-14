@@ -12,11 +12,14 @@ namespace PolarisAICore.Response {
             "Sure, i will remind you to",
             "Got it! I will remind you to",
             "You don't have to ask again! I will remind you to",
+            "Sure thing, I won't let you forget to",
+            "Okay, I'll remind you to",           
         };
 
         static readonly String[] _noEntityResponses =
         {
             "Of course, what do you want me to remind you about?",
+            "What's the reminder?",
             "Sure, what do you want to be reminded about?",
             "Alright, what do you want to be reminded about?",
             "You don't have to ask again! what do you want me to remind you about?"

@@ -8,11 +8,11 @@ using PolarisAICore.Properties;
 namespace PolarisAICore {
 	public class PolarisAICore {
 
-        static readonly PolarisAIDatabaseConnection _database = new PolarisAIDatabaseConnection(
+        /*static readonly PolarisAIDatabaseConnection _database = new PolarisAIDatabaseConnection(
             Resources.ResourceManager.GetString("DBsource"),
             Resources.ResourceManager.GetString("DBname"),
             Resources.ResourceManager.GetString("DBlogin"),
-            Resources.ResourceManager.GetString("DBpassword"));
+            Resources.ResourceManager.GetString("DBpassword"));*/
 
         static void Main() {
 
@@ -27,7 +27,7 @@ namespace PolarisAICore {
             Utterance utterance = new Utterance(CognizeNLP(query));
             utterance.Response = Response.ResponseController.SetResponse(utterance);
 
-            _database.InsertRequestDetails(utterance);
+            //_database.InsertRequestDetails(utterance);
 
             return utterance.GetResponse();
         }

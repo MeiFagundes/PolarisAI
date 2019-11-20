@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace PolarisAIServer.Controllers {
+namespace PolarisAIWebAPI.Controllers {
     [Route("[controller]")]
     [ApiController]
     public class DebugController : ControllerBase {

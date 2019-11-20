@@ -1,12 +1,8 @@
 1	What do you do
+1	What do you like to do
 1	In your free time, what do you do
 1	What do you like to do
 1	How is your everyday life
-1	How are you
-1	How you doing
-1	Hey there
-1	Howdy
-1	What's up
 1	What's going on
 0	Where are you
 0	What are you

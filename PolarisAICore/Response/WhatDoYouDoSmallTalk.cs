@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace PolarisAICore.Response {
     class WhatDoYouDoSmallTalk {
@@ -9,7 +7,7 @@ namespace PolarisAICore.Response {
         static readonly String[] _noEntityResponses =
         {
             "I mostly stay at the clouds and help nice people!",
-            "I like drinking tea while looking at the beatiful Sky.",
+            "I like drinking tea while looking at the beautiful Sky.",
             "I love helping people and telling funny jokes!"
         };
 

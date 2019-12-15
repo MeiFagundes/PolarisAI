@@ -9,7 +9,7 @@ namespace PolarisAICore.Response {
         static readonly String[] _responses = 
         {
             "Of course, I will remind you to",
-            "Sure, i will remind you to",
+            "Sure, I will remind you to",
             "Got it! I will remind you to",
             "You don't have to ask again! I will remind you to",
             "Sure thing, I won't let you forget to",

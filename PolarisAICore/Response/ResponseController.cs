@@ -21,13 +21,5 @@ namespace PolarisAICore.Response {
             else
                 return null;
         }
-
-        public static void SetResponseLegacy(Utterance u) {
-
-            if (u.IsRequest)
-                Response.Request.SetResponse(u);
-            else if (u.IsQuestion)
-                Response.Question.SetResponse(u);
-        }
     }
 }

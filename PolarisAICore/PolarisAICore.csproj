@@ -6,24 +6,24 @@
     <ApplicationIcon />
   </PropertyGroup>
   <ItemGroup>
-    <None Remove="Vocabulary\VocabularyResources\Adverbs.txt" />
-    <None Remove="Vocabulary\VocabularyResources\Ignored_Words.txt" />
-    <None Remove="Vocabulary\VocabularyResources\Interrogative_Words.txt" />
-    <None Remove="Vocabulary\VocabularyResources\Nouns.txt" />
-    <None Remove="Vocabulary\VocabularyResources\Pronouns.txt" />
-    <None Remove="Vocabulary\VocabularyResources\Punctuation_Marks.txt" />
-    <None Remove="Vocabulary\VocabularyResources\Skills.txt" />
-    <None Remove="Vocabulary\VocabularyResources\Verbs.txt" />
+    <None Remove="Model\VocabularyDataset\Adverbs.txt" />
+    <None Remove="Model\VocabularyDataset\Ignored_Words.txt" />
+    <None Remove="Model\VocabularyDataset\Interrogative_Words.txt" />
+    <None Remove="Model\VocabularyDataset\Nouns.txt" />
+    <None Remove="Model\VocabularyDataset\Pronouns.txt" />
+    <None Remove="Model\VocabularyDataset\Punctuation_Marks.txt" />
+    <None Remove="Model\VocabularyDataset\Skills.txt" />
+    <None Remove="Model\VocabularyDataset\Verbs.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Vocabulary\VocabularyResources\Adverbs.txt" />
-    <Resource Include="Vocabulary\VocabularyResources\Ignored_Words.txt" />
-    <Resource Include="Vocabulary\VocabularyResources\Interrogative_Words.txt" />
-    <Resource Include="Vocabulary\VocabularyResources\Nouns.txt" />
-    <Resource Include="Vocabulary\VocabularyResources\Pronouns.txt" />
-    <Resource Include="Vocabulary\VocabularyResources\Punctuation_Marks.txt" />
-    <Resource Include="Vocabulary\VocabularyResources\Skills.txt" />
-    <Resource Include="Vocabulary\VocabularyResources\Verbs.txt" />
+    <Resource Include="Model\VocabularyDataset\Adverbs.txt" />
+    <Resource Include="Model\VocabularyDataset\Ignored_Words.txt" />
+    <Resource Include="Model\VocabularyDataset\Interrogative_Words.txt" />
+    <Resource Include="Model\VocabularyDataset\Nouns.txt" />
+    <Resource Include="Model\VocabularyDataset\Pronouns.txt" />
+    <Resource Include="Model\VocabularyDataset\Punctuation_Marks.txt" />
+    <Resource Include="Model\VocabularyDataset\Skills.txt" />
+    <Resource Include="Model\VocabularyDataset\Verbs.txt" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.ML" Version="1.3.1" />

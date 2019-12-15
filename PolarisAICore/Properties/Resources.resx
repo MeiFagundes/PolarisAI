@@ -119,13 +119,13 @@
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="Adverbs" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Vocabulary\VocabularyResources\Adverbs.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+    <value>..\Model\VocabularyDataset\Adverbs.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
   <data name="DBlogin" xml:space="preserve">
     <value>meifagundes</value>
   </data>
   <data name="DBname" xml:space="preserve">
-    <value>PolarisAIDB</value>
+    <value>PolarisAI</value>
   </data>
   <data name="DBpassword" xml:space="preserve">
     <value>polarisAI19753</value>
@@ -134,24 +134,24 @@
     <value>polarisai.database.windows.net</value>
   </data>
   <data name="Ignored_Words" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Vocabulary\VocabularyResources\Ignored_Words.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+    <value>..\Model\VocabularyDataset\Ignored_Words.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
   <data name="Interrogative_Words" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Vocabulary\VocabularyResources\Interrogative_Words.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+    <value>..\Model\VocabularyDataset\Interrogative_Words.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
   <data name="Nouns" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Vocabulary\VocabularyResources\Nouns.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+    <value>..\Model\VocabularyDataset\Nouns.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
   <data name="Pronouns" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Vocabulary\VocabularyResources\Pronouns.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+    <value>..\Model\VocabularyDataset\Pronouns.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
   <data name="Punctuation_Marks" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Vocabulary\VocabularyResources\Punctuation_Marks.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+    <value>..\Model\VocabularyDataset\Punctuation_Marks.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
   <data name="Skills" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Vocabulary\VocabularyResources\Skills.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+    <value>..\Model\VocabularyDataset\Skills.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
   <data name="Verbs" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Vocabulary\VocabularyResources\Verbs.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+    <value>..\Model\VocabularyDataset\Verbs.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
 </root>

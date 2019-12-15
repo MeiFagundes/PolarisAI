@@ -1,5 +1,5 @@
 ﻿using Newtonsoft.Json.Linq;
-using PolarisAICore.Vocabulary;
+using PolarisAICore.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,7 +30,7 @@ namespace PolarisAICore {
 
         // Legacy
 
-        public VocabularyModel Vocabulary { get; set; }
+        public Vocabulary Vocabulary { get; set; }
         public List<String> Phrase { get; set; } = new List<String>();
         public List<Byte> VerbsIndex { get; set; } = new List<Byte>();
         public List<Byte> PronounsIndex { get; set; } = new List<Byte>();
@@ -238,8 +238,10 @@ namespace PolarisAICore {
                         return 11;
                 }
             }
-            else
+            else {
+                Response = "Sorry, i didn't understand. Can you say something else?";
                 return 0;
+            }
         }
 
         public string GetDebugLog() {
@@ -249,49 +251,6 @@ namespace PolarisAICore {
             debugInfo += "\nQuery: '" + Query + "'\n";
             debugInfo += $"\nStarlight Response:\n{_nlpResponse.ToString()}\n";
             debugInfo += $"\nPolarisAI Response:\n{GetResponse()}\n";
-
-            return debugInfo;
-        }
-
-        [Obsolete("Static cognition is obsolete, please use GetDebugLog() instead")]
-        public string GetDebugLogLegacy() {
-
-            string debugInfo = "";
-
-            debugInfo += "Query: '" + Query + "'\n";
-
-            debugInfo += "Is this a Request?  : " + IsRequest + "\n";
-            debugInfo += "Is this a Question? : " + IsQuestion + "\n\n";
-
-            List<String>[] phraseDebug = new List<String>[Phrase.Count];
-
-            for (int i = 0; i < phraseDebug.Length; i++) {
-                phraseDebug[i] = new List<String>();
-            }
-
-            for (int i = 0; i < Phrase.Count; i++) {
-                if (VerbsIndex.Exists(index => index == i))
-                    phraseDebug[i].Add("Verb");
-                if (SkillsIndex.Exists(index => index == i))
-                    phraseDebug[i].Add("Skill");
-                if (PronounsIndex.Exists(index => index == i))
-                    phraseDebug[i].Add("Pronoun");
-                if (AdverbsIndex.Exists(index => index == i))
-                    phraseDebug[i].Add("Adverb");
-                if (NounsIndex.Exists(index => index == i))
-                    phraseDebug[i].Add("Noun");
-                if (IntWordsIndex.Exists(index => index == i))
-                    phraseDebug[i].Add("Interrogative Word");
-            }
-
-            for (int i = 0; i < phraseDebug.Length; i++) {
-
-                debugInfo += "  '" + Phrase[i] + "' -> ";
-                foreach (String type in phraseDebug[i]) {
-                    debugInfo += type + "; ";
-                }
-                debugInfo += "\n";
-            }
 
             return debugInfo;
         }
